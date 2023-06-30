@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    container_name: "server"
+    image: "nginx:latest"
+    ports:
+      - "8888:80"
+    volumes:
+      - "./src:/var/www/html"
+      - "./container/server/default.conf:/etc/nginx/conf.d/default.conf"
+
+  laravel:
+    container_name: "laravel"
+    build:
+      dockerfile: "./container/php/Dockerfile"
+    volumes:
+      - "./src:/var/www/html"
+      - "./container/php/php.ini:/usr/local/etc/php/php.ini"
+
+  db:
+    container_name: "db"
+    image: "mysql:8.0"
+    ports:
+      - "3307:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=database"
+      - "MYSQL_USER=laravel"
+      - "MYSQL_PASSWORD=password"
+    volumes:
+      - "./container/db/my.conf:/etc/my.conf"
+      - "mysql-data:/var/lib/mysql"
+volumes:
+  mysql-data:
