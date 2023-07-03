@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     container_name: "server"
-    image: "nginx:latest"
+    image: "nginx:1.24"
     ports:
       - "8888:80"
     volumes:
