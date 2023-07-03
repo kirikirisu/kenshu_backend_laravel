@@ -1,4 +1,4 @@
-FROM php:fpm-buster
+FROM php:8.2-fpm
 
 RUN apt-get update
 RUN apt-get -y install git zip unzip vim
