@@ -25,7 +25,7 @@ services:
       - "3307:3306"
     environment:
       - "MYSQL_ROOT_PASSWORD=password"
-      - "MYSQL_DATABASE=database"
+      - "MYSQL_DATABASE=kenshu"
       - "MYSQL_USER=laravel"
       - "MYSQL_PASSWORD=password"
     volumes:
