@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->unsignedBigInteger('post_id');
+            $table->uuid('id')->primary();
+            $table->uuid('post_id');
             $table->string('url', 10000);
             $table->timestamps();
 
