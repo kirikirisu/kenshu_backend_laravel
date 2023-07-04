@@ -17,7 +17,8 @@
     <h1 class="text-4xl font-bold">Kenshu backend laravel</h1>
 </header>
 <main>
-    <form action="/user/signup" method="post" enctype="multipart/form-data" class="w-2/5">
+    <form action="/register" method="post" enctype="multipart/form-data" class="w-2/5">
+        @csrf
         <label for="name" class="block text-base font-semibold"
         >名前</label
         >
@@ -31,15 +32,15 @@
             />
         </div>
         <div class="mt-6">
-            <label for="mail" class="block text-base font-semibold"
+            <label for="email" class="block text-base font-semibold"
             >メールアドレス</label
             >
             <div class="mt-1">
                 <input
-                    id="mail"
-                    aria-label="mail for user"
+                    id="email"
+                    aria-label="email for user"
                     type="text"
-                    name="mail"
+                    name="email"
                     class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
                 />
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('top');
 });
+
+Route::get('register', function () {
+    return view('register');
+});
+
+Route::post('register', [UserRegisterController::class, 'index']);
