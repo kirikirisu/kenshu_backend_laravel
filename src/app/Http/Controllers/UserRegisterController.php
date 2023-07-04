@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
 use App\Interfaces\UserRepositoryInterface;
 
 class UserRegisterController extends Controller
