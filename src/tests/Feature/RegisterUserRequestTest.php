@@ -43,10 +43,12 @@ final class RegisterUserRequestTest extends TestCase
 
         $png_file = UploadedFile::fake()->image('awsome.png');
         $jpg_file = UploadedFile::fake()->image('awsome.jpg');
+        $svg_file = UploadedFile::fake()->image('awsome.svg');
         $avatar = [
             'アバター画像は必須ではないこと' => [true, 'test', 'test@test.com', 'testtest', null],
             'png形式のアバター画像が入力できること' => [true, 'test', 'test@test.com', 'testtest', $png_file],
             'jpg形式のアバター画像が入力できること' => [true, 'test', 'test@test.com', 'testtest', $jpg_file],
+            'svg形式のアバター画像は入力できないこと' => [false, 'test', 'test@test.com', 'testtest', $svg_file],
         ];
 
         return [...$name, ...$email, ...$password, ...$avatar];
