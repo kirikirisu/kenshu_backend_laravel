@@ -3,13 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @property string $name
  * @property string $email
  * @property string $password
- * @property File $avatar
+ * @property UploadedFile $avatar
  */
 class RegisterUserRequest extends FormRequest
 {
