@@ -6,6 +6,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\RegisterUserRequest;
+use \Illuminate\Http\Testing\File;
 
 class UserRegisterRequestTest extends TestCase
 {
@@ -23,19 +24,29 @@ class UserRegisterRequestTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
-    public function test_アバター画像を入力できること(): void
+    /**
+     * @dataProvider dataProvider
+     */
+    public function test(string $name, string $email, string $password, File $file): void
     {
         $request = new RegisterUserRequest();
-        $file = UploadedFile::fake()->image('awsome.jpg');
 
         $validator = $this->app['validator']->make(
-            ['name' => 'test'],
-            ['email' => 'test@test.com'],
-            ['password' => 'testtest'],
+            ['name' => $name],
+            ['email' => $email],
+            ['password' => $password],
             ['avatar' => $file],
             $request->rules()
         );
 
         $this->assertFalse($validator->fails());
     }
+
+    public function dataProvider()
+    {
+        return [
+            'アバター画像を入力できること'  => ['test', 'test@test.com', 'testtest', UploadedFile::fake()->image('awsome.jpg')],
+        ];
+    }
+
 }
