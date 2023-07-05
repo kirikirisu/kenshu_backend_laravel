@@ -5,13 +5,13 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
-use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\RegisterUserRequest;
 
 class UserRegisterRequestTest extends TestCase
 {
     public function test_アバター画像が必須では無いこと(): void
     {
-        $request = new UserRegisterRequest();
+        $request = new RegisterUserRequest();
 
         $validator = $this->app['validator']->make(
             ['name' => 'test'],
@@ -25,7 +25,7 @@ class UserRegisterRequestTest extends TestCase
 
     public function test_アバター画像を入力できること(): void
     {
-        $request = new UserRegisterRequest();
+        $request = new RegisterUserRequest();
         $file = UploadedFile::fake()->image('awsome.jpg');
 
         $validator = $this->app['validator']->make(
