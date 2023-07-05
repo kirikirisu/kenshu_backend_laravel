@@ -55,7 +55,7 @@ final class RegisterUserRequestTest extends TestCase
     }
 
     #[DataProvider('dataProvider')]
-    final function testNameField(bool $expected, string $name, string $email, string $password, ?File $file): void
+    final function testInput(bool $expected, string $name, string $email, string $password, ?File $file): void
     {
         $request = new RegisterUserRequest();
 
