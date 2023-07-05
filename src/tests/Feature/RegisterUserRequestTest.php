@@ -12,26 +12,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class RegisterUserRequestTest extends TestCase
 {
-    /**
-     * name
-     * 　必須項目
-     * 　最大100文字
-     *   1文字以上
-     *
-     * email
-     * 　必須項目
-     * 　最大100文字
-     * 　メアド形式
-     *
-     * password
-     *   必須項目
-     *   4文字以上
-     *
-     * avatar
-     *   必須項目でない
-     * 　jpg, png 形式のみ
-     */
-
     public static function dataProvider(): array
     {
         $name = [
@@ -87,42 +67,4 @@ final class RegisterUserRequestTest extends TestCase
 
         $this->assertEquals($expected, $validator->passes());
     }
-
-//    public static function rejectProvider(): array
-//    {
-//        return [
-//            '名前は必須で入力されること' => ['', 'test@test.com', 'testtest', null],
-//            '名前が100文以上で入力できないこと' => ['１００文字はどのくらいの長さなのか実際に書いてみないと分からない。数えるのが面倒なので文字カウンタを使ってみるが空白込みの時と空白抜きの文字数をカウントしてくれるサイトはとても便利だああああああああ。。', 'test@test.com', 'testtest', null],
-//            'failしてほしい' => ['hoge', 'test@test.com', 'testtest', null],
-//        ];
-//    }
-//
-//    #[DataProvider('rejectProvider')]
-//    final public function test_Reject(string $name, string $email, string $password, ?File $file): void
-//    {
-//        $request = new RegisterUserRequest();
-//
-//        $validator = $this->app['validator']->make(
-//            ['name' => $name],
-//            ['email' => $email],
-//            ['password' => $password],
-//            ['avatar' => $file],
-//            $request->rules()
-//        );
-//
-//        $this->assertTrue($validator->errors()->has('name'));
-//    }
-
-
-
-//    public function dataProvider()
-//    {
-//        return [
-//            'アバター画像が必須では無いこと' => ['test', 'test@test.com', 'testtest', null],
-//            'JPGのアバター画像を入力できること'  => ['test', 'test@test.com', 'testtest', UploadedFile::fake()->image('awsome.jpg')],
-//            'PNGのアバター画像を入力できること'  => ['test', 'test@test.com', 'testtest', UploadedFile::fake()->image('awsome.png')],
-//            ''  => ['', 'test@test.com', 'testtest', UploadedFile::fake()->image('awsome.png')],
-//        ];
-//    }
-
 }
