@@ -1,4 +1,5 @@
 <?php
+/** @noinspection NonAsciiCharacters */
 
 namespace Tests\Feature;
 
@@ -8,7 +9,7 @@ use App\Http\Requests\UserRegisterRequest;
 
 class UserRegisterRequestTest extends TestCase
 {
-    public function test_アバター画像が必須では無いこと()
+    public function test_アバター画像が必須では無いこと(): void
     {
         $request = new UserRegisterRequest();
 
@@ -22,7 +23,7 @@ class UserRegisterRequestTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
-    public function test_アバター画像を入力できること()
+    public function test_アバター画像を入力できること(): void
     {
         $request = new UserRegisterRequest();
         $file = UploadedFile::fake()->image('awsome.jpg');
