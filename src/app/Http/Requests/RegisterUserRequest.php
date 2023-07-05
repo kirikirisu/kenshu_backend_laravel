@@ -4,6 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string name
+ * @property string email
+ * @property string password
+ * @property string avatar
+ */
 class RegisterUserRequest extends FormRequest
 {
     /**
