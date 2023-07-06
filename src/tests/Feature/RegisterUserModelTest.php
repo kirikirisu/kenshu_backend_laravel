@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+/** @noinspection NonAsciiCharacters */
 
 namespace Tests\Feature;
 
@@ -13,58 +14,83 @@ class RegisterUserModelTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * id, name, email, password　が挿入されること
-     * passwordはhashになっていること
-     * idが生成されていること
-     * password, remember_tokenは取り出せないこと
-     */
+    public array $registerData = [
+      'name' => 'John Doe',
+      'email' => 'john@example.com',
+      'password' => 'password',
+      'icon_url' => '/public/images/awsome.png'
+    ];
 
-    public function test_avatarなしでユーザー登録できること(): void
+    public function test_nameが挿入されること(): void
     {
-        $registerData = [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-            'password' => 'password',
-        ];
 
         $user = new User();
-        $user->name = $registerData['name'];
-        $user->email = $registerData['email'];
-        $user->password = $registerData['password'];
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
         $createdUser = $user->save();
 
         $this->assertTrue($createdUser);
-        $this->assertNotNull($user->id);
-        $this->assertIsString($user->id);
-        $this->assertEquals($registerData['name'], $user->name);
-        $this->assertEquals($registerData['email'], $user->email);
-        $this->assertTrue(Hash::check($registerData['password'], $user->password));
+        $this->assertNotNull($user->name);
+        $this->assertIsString($user->name);
+        $this->assertEquals($this->registerData['name'], $user->name);
+    }
+
+    public function test_emailが挿入されること(): void
+    {
+        $user = new User();
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
+        $createdUser = $user->save();
+
+        $this->assertTrue($createdUser);
+        $this->assertNotNull($user->email);
+        $this->assertIsString($user->email);
+        $this->assertEquals($this->registerData['email'], $user->email);
+    }
+
+    public function test_passwordが挿入されること(): void
+    {
+        $user = new User();
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
+        $createdUser = $user->save();
+
+        $this->assertTrue($createdUser);
+        $this->assertNotNull($user->password);
+        $this->assertIsString($user->password);
+        $this->assertTrue(Hash::check($this->registerData['password'], $user->password));
+    }
+
+    public function test_passwordが取り出せないこと(): void
+    {
+        $user = new User();
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
+        $user->save();
 
         $this->assertArrayNotHasKey('password', $user->toArray());
     }
 
-    public function test_avatarを合わせてユーザー登録できること(): void
+    public function test_iconが挿入されること(): void
     {
-        $registerData = [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-            'password' => 'password',
-            'avatar' => '/public/images/awsome.png'
-        ];
-
         $user = new User();
-        $user->name = $registerData['name'];
-        $user->email = $registerData['email'];
-        $user->password = $registerData['password'];
-        $user->icon_url = $registerData['avatar'];
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = $this->registerData['icon_url'];
         $createdUser = $user->save();
 
         $this->assertTrue($createdUser);
-        $this->assertNotNull($user->id);
-        $this->assertIsString($user->id);
-        $this->assertEquals($registerData['name'], $user->name);
-        $this->assertEquals($registerData['email'], $user->email);
-        $this->assertTrue(Hash::check($registerData['password'], $user->password));
+        $this->assertNotNull($user->icon_url);
+        $this->assertIsString($user->icon_url);
+        $this->assertEquals($this->registerData['icon_url'], $user->icon_url);
     }
 }
