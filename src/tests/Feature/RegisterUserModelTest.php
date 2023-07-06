@@ -4,9 +4,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use App\Models\User;
 
@@ -20,6 +18,20 @@ class RegisterUserModelTest extends TestCase
       'password' => 'password',
       'icon_url' => '/public/images/awsome.png'
     ];
+
+    public function test_idが挿入されること(): void
+    {
+        $user = new User();
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
+        $createdUser = $user->save();
+
+        $this->assertTrue($createdUser);
+        $this->assertNotNull($user->id);
+        $this->assertIsString($user->id);
+    }
 
     public function test_nameが挿入されること(): void
     {
