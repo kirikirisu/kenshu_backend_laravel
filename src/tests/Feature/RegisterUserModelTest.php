@@ -76,6 +76,17 @@ class RegisterUserModelTest extends TestCase
         $this->assertTrue($createdUser);
         $this->assertNotNull($user->password);
         $this->assertIsString($user->password);
+    }
+
+    public function test_passwordがhash化されて挿入されること(): void
+    {
+        $user = new User();
+        $user->name = $this->registerData['name'];
+        $user->email = $this->registerData['email'];
+        $user->password = $this->registerData['password'];
+        $user->icon_url = null;
+        $createdUser = $user->save();
+
         $this->assertTrue(Hash::check($this->registerData['password'], $user->password));
     }
 
