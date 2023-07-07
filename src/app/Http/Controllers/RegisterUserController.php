@@ -7,8 +7,11 @@ use Illuminate\Http\RedirectResponse;
 
 class RegisterUserController extends Controller
 {
-    public function index(RegisterUserRequest $request): RedirectResponse
+    public function __invoke(RegisterUserRequest $request): RedirectResponse
     {
+       $validatedData = $request->validated();
+       $validatedData['password'] = bcrypt($request->password);
+       $request->session()->put('user_id', 1);
 
        return response()->redirectTo('http://localhost:8888');
     }
