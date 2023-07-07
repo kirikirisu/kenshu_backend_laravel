@@ -12,7 +12,7 @@ class RegisterUserControllerTest extends TestCase
     const BASE_URL = 'http://localhost:8888';
 
     /** @noinspection NonAsciiCharacters */
-    public function test_ユーザー登録後にログイン状態になること()
+    public function test_ユーザー登録後にログイン状態になりトップページにリダイレクトすること()
     {
         $data = [
             'name' => 'John Doe',
@@ -28,7 +28,7 @@ class RegisterUserControllerTest extends TestCase
     }
 
     /** @noinspection NonAsciiCharacters */
-    public function test_名前入力に不足があった場合にエラーが返ること()
+    public function test_名前入力に不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
             'name' => '',
@@ -43,7 +43,7 @@ class RegisterUserControllerTest extends TestCase
     }
 
     /** @noinspection NonAsciiCharacters */
-    public function test_メールアドレスに不足があった場合にエラーが返ること()
+    public function test_メールアドレスに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
             'name' => 'jhon',
@@ -58,7 +58,7 @@ class RegisterUserControllerTest extends TestCase
     }
 
     /** @noinspection NonAsciiCharacters */
-    public function test_パスワードに不足があった場合にエラーが返ること()
+    public function test_パスワードに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
             'name' => 'jhon',
@@ -73,7 +73,7 @@ class RegisterUserControllerTest extends TestCase
     }
 
     /** @noinspection NonAsciiCharacters */
-    public function test_ファイルに不足があった場合にエラーが返ること()
+    public function test_ファイルに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $svg_file = UploadedFile::fake()->image('awsome.svg');
 
