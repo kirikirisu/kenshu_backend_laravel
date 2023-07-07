@@ -11,7 +11,6 @@ class RegisterUserController extends Controller
     public function __invoke(RegisterUserRequest $request): RedirectResponse
     {
        $validatedData = $request->validated();
-       $validatedData['password'] = bcrypt($request->password);
 
        $user = new User();
        $user->name =  $validatedData['name'];
