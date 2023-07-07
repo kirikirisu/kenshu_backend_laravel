@@ -13,7 +13,7 @@ use Illuminate\Http\UploadedFile;
  */
 class RegisterUserRequest extends FormRequest
 {
-    protected $redirect = 'http://localhost:8888';
+    protected $redirect = 'http://localhost:8888/register';
 
     /**
      * Determine if the user is authorized to make this request.

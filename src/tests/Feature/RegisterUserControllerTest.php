@@ -38,7 +38,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect(self::BASE_URL);
+        $response->assertRedirect(self::BASE_URL . '/register');
         $response->assertSessionHasErrors(['name']);
     }
 
@@ -53,7 +53,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect(self::BASE_URL);
+        $response->assertRedirect(self::BASE_URL . '/register');
         $response->assertSessionHasErrors(['email']);
     }
 
@@ -68,7 +68,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect(self::BASE_URL);
+        $response->assertRedirect(self::BASE_URL . '/register');
         $response->assertSessionHasErrors(['password']);
     }
 
@@ -86,7 +86,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect(self::BASE_URL);
+        $response->assertRedirect(self::BASE_URL . '/register');
         $response->assertSessionHasErrors(['avatar']);
     }
 }
