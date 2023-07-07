@@ -3,11 +3,13 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class RegisterUserControllerTest extends TestCase
 {
     use RefreshDatabase;
+    const BASE_URL = 'http://localhost:8888';
 
     /** @noinspection NonAsciiCharacters */
     public function test_ユーザー登録後にログイン状態になること()
@@ -21,7 +23,7 @@ class RegisterUserControllerTest extends TestCase
         $response = $this->post('/register', $data);
 
         $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertRedirect(self::BASE_URL);
         $this->assertEquals(1, session('user_id'));
     }
 
@@ -36,7 +38,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertRedirect(self::BASE_URL);
         $response->assertSessionHasErrors(['name']);
     }
 
@@ -51,7 +53,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertRedirect(self::BASE_URL);
         $response->assertSessionHasErrors(['email']);
     }
 
@@ -66,7 +68,25 @@ class RegisterUserControllerTest extends TestCase
 
         $response = $this->post('/register', $data);
         $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertRedirect(self::BASE_URL);
         $response->assertSessionHasErrors(['password']);
+    }
+
+    /** @noinspection NonAsciiCharacters */
+    public function test_ファイルに不足があった場合にエラーが返ること()
+    {
+        $svg_file = UploadedFile::fake()->image('awsome.svg');
+
+        $data = [
+            'name' => 'jhon',
+            'email' => 'jhon@example.com',
+            'password' => 'password',
+            'avatar' => $svg_file
+        ];
+
+        $response = $this->post('/register', $data);
+        $response->assertStatus(302);
+        $response->assertRedirect(self::BASE_URL);
+        $response->assertSessionHasErrors(['avatar']);
     }
 }
