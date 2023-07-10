@@ -12,7 +12,7 @@ class User extends Model
 
     protected $fillable = ['id', 'name', 'email', 'icon_url'];
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password'];
 
     protected $casts = ['password' => 'hashed'];
 
