@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 
@@ -36,5 +37,15 @@ class RegisterUserRequest extends FormRequest
             'password' => ['required', 'min:4',  'max:100', 'string'],
             'avatar' => ['nullable','file', 'mimes:jpeg,png', 'max:2048']
         ];
+    }
+
+    public function newUser(): User 
+    {
+       $user = new User();
+       $user->name = $this->name;
+       $user->email = $this->email;
+       $user->password = bcrypt($this->password);
+
+       return $user;
     }
 }

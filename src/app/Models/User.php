@@ -18,7 +18,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property string $email
  * @property string $password
  * @property string $icon_url
- * @method bool save(array $options)
  */
 class User extends Model implements 
     AuthenticatableContract,

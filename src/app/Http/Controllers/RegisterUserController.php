@@ -11,10 +11,7 @@ class RegisterUserController extends Controller
 {
     public function __invoke(RegisterUserRequest $request): RedirectResponse
     {
-       $user = new User();
-       $user->name =  $request->name;
-       $user->email =  $request->email;
-       $user->password = bcrypt($request->password);
+       $user = $request->newUser();
        $user->save();
 
        Auth::login($user);
