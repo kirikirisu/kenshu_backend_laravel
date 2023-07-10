@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+/** @noinspection NonAsciiCharacters */
 
 namespace Tests\Feature;
 
@@ -10,7 +11,6 @@ class RegisterUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @noinspection NonAsciiCharacters */
     public function test_ユーザー登録後にログイン状態になりトップページにリダイレクトすること()
     {
         $data = [
@@ -26,7 +26,6 @@ class RegisterUserControllerTest extends TestCase
         $this->assertTrue(session()->has('user_id'));
     }
 
-    /** @noinspection NonAsciiCharacters */
     public function test_名前入力に不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
@@ -41,7 +40,6 @@ class RegisterUserControllerTest extends TestCase
         $response->assertSessionHasErrors(['name']);
     }
 
-    /** @noinspection NonAsciiCharacters */
     public function test_メールアドレスに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
@@ -56,7 +54,6 @@ class RegisterUserControllerTest extends TestCase
         $response->assertSessionHasErrors(['email']);
     }
 
-    /** @noinspection NonAsciiCharacters */
     public function test_パスワードに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $data = [
@@ -71,7 +68,6 @@ class RegisterUserControllerTest extends TestCase
         $response->assertSessionHasErrors(['password']);
     }
 
-    /** @noinspection NonAsciiCharacters */
     public function test_ファイルに不足があった場合にエラーと共に登録画面にリダイレクトすること()
     {
         $svg_file = UploadedFile::fake()->image('awsome.svg');
