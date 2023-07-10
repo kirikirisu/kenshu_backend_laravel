@@ -39,7 +39,7 @@ class RegisterUserRequest extends FormRequest
         ];
     }
 
-    public function newUser(): User 
+    public function toUser(): User 
     {
        $user = new User();
        $user->name = $this->name;

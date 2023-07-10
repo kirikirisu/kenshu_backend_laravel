@@ -11,7 +11,7 @@ class RegisterUserController extends Controller
 {
     public function __invoke(RegisterUserRequest $request): RedirectResponse
     {
-       $user = $request->newUser();
+       $user = $request->toUser();
        $user->save();
 
        Auth::login($user);
