@@ -4,13 +4,16 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $email
+ * @property string $password
+ */
 class LoginUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
     }
-
 
     /**
      * Get the validation rules that apply to the request.
