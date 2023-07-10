@@ -55,7 +55,7 @@ class RegisterUserRequestTest extends TestCase
     }
 
     #[DataProvider('dataProvider')]
-    function testValidateRules(bool $expected, string $name, string $email, string $password, ?File $file): void
+    public function testValidateRules(bool $expected, string $name, string $email, string $password, ?File $file): void
     {
         $request = new RegisterUserRequest();
 
