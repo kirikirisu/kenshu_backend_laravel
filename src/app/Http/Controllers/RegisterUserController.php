@@ -20,6 +20,6 @@ class RegisterUserController extends Controller
 
        $request->session()->put('user_id', $user->id);
 
-       return response()->redirectTo('http://localhost:8888');
+       return response()->redirectTo('/');
     }
 }
