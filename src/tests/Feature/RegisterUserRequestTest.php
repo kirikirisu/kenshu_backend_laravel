@@ -10,7 +10,7 @@ use \Illuminate\Http\Testing\File;
 use App\Http\Requests\RegisterUserRequest;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-final class RegisterUserRequestTest extends TestCase
+class RegisterUserRequestTest extends TestCase
 {
     public static function dataProvider(): array
     {
@@ -55,7 +55,7 @@ final class RegisterUserRequestTest extends TestCase
     }
 
     #[DataProvider('dataProvider')]
-    final function testInput(bool $expected, string $name, string $email, string $password, ?File $file): void
+    public function testValidateRules(bool $expected, string $name, string $email, string $password, ?File $file): void
     {
         $request = new RegisterUserRequest();
 
