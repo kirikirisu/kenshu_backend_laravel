@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 
@@ -13,12 +14,14 @@ use Illuminate\Http\UploadedFile;
  */
 class RegisterUserRequest extends FormRequest
 {
+    protected $redirect = '/register';
+
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -34,5 +37,15 @@ class RegisterUserRequest extends FormRequest
             'password' => ['required', 'min:4',  'max:100', 'string'],
             'avatar' => ['nullable','file', 'mimes:jpeg,png', 'max:2048']
         ];
+    }
+
+    public function toUser(): User 
+    {
+       $user = new User();
+       $user->name = $this->name;
+       $user->email = $this->email;
+       $user->password = $this->password;
+
+       return $user;
     }
 }
