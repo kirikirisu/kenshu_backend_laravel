@@ -4,6 +4,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
@@ -23,7 +24,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertRedirect('/');
-        $this->assertTrue(session()->has('user_id'));
+        $this->assertTrue(Auth::check());
     }
 
     public function test_名前入力に不足があった場合にエラーと共に登録画面にリダイレクトすること()

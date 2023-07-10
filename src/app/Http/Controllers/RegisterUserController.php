@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class RegisterUserController extends Controller
@@ -18,7 +19,7 @@ class RegisterUserController extends Controller
        $user->password = bcrypt($validatedData['password']);
        $user->save();
 
-       $request->session()->put('user_id', $user->id);
+       Auth::login($user);
 
        return response()->redirectTo('/');
     }
