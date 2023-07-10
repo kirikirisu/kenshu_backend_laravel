@@ -5,17 +5,16 @@ on:
   pull_request:
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
 
-      - name: Up docker contianers
+      - name: Up docker container
         run: |
-          docker compose up -d --build
-          docker compose ps -a
+          docker compose up -d --build laravel
 
       - name: Init
         run: |
@@ -24,3 +23,24 @@ jobs:
       - name: Run lint
         run: |
           docker compose exec laravel composer larastan
+
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Up docker container
+        run: docker compose up -d --build laravel db
+
+      - name: Init
+        run: docker compose exec laravel composer install
+
+      - name: Health check for DB
+        run:  |
+          docker compose ps -a
+          docker compose exec db mysql -u laravel -ppassword kenshu -e"select 1;"
+
+      - name: Run test
+        run: docker compose exec laravel composer test

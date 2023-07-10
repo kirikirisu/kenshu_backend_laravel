@@ -29,6 +29,7 @@ services:
       - "MYSQL_DATABASE=kenshu"
       - "MYSQL_USER=laravel"
       - "MYSQL_PASSWORD=password"
+      - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
     volumes:
       - "./container/db/my.conf:/etc/my.conf"
       - "mysql-data:/var/lib/mysql"
