@@ -19,3 +19,7 @@ Route::get('/', function () {
 });
 
 Route::post('/register', RegisterUserController::class);
+
+Route::get('/register', function () {
+    return view('register');
+});
