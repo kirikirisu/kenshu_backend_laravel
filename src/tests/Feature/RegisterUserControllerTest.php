@@ -24,7 +24,7 @@ class RegisterUserControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertRedirect(self::BASE_URL);
-        $this->assertEquals(1, session('user_id'));
+        $this->assertTrue(session()->has('user_id'));
     }
 
     /** @noinspection NonAsciiCharacters */

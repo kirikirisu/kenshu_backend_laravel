@@ -18,7 +18,7 @@ class RegisterUserController extends Controller
        $user->password = bcrypt($validatedData['password']);
        $user->save();
 
-       $request->session()->put('user_id', 1);
+       $request->session()->put('user_id', $user->id);
 
        return response()->redirectTo('http://localhost:8888');
     }
