@@ -37,10 +37,5 @@ jobs:
       - name: Init
         run: docker compose exec laravel composer install
 
-      - name: Health check for DB
-        run:  |
-          docker compose ps -a
-          docker compose exec db mysql -u laravel -ppassword kenshu -e"select 1;"
-
       - name: Run test
         run: docker compose exec laravel composer test
