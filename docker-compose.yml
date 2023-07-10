@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   web:
@@ -13,6 +13,7 @@ services:
   laravel:
     container_name: "laravel"
     build:
+      context: .
       dockerfile: "./container/php/Dockerfile"
     volumes:
       - "./src:/var/www/html"
