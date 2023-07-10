@@ -23,9 +23,6 @@ class LoginUserRequestTest extends TestCase
 
         $password = [
             'パスワードの入力は必須であること' => [false, 'test', 'test@test.com', '', null],
-            'パスワードは3文字で入力できないこと' => [false, 'test', 'test@test.com', 'tes', null],
-            'パスワードは4文字で入力できること' => [true, 'test', 'test@test.com', 'test', null],
-            'パスワードは5文字で入力できること' => [true, 'test', 'test@test.com', 'testt', null],
             'パスワードは99文字で入力できること' => [true, 'test', 'test@test.com', str_repeat('a', 99), null],
             'パスワードは100文字で入力できること' => [true, 'test', 'test@test.com', str_repeat('a', 100), null],
             'パスワードは101文字で入力できないこと' => [false, 'test', 'test@test.com', str_repeat('a', 101), null],
@@ -35,7 +32,7 @@ class LoginUserRequestTest extends TestCase
     }
 
     #[DataProvider('dataProvider')]
-    final function testInput(bool $expected, string $name, string $email, string $password, ?File $file): void
+    public function testValidateRules(bool $expected, string $name, string $email, string $password, ?File $file): void
     {
         $request = new LoginUserRequest();
 
