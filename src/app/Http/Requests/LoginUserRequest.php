@@ -27,4 +27,9 @@ class LoginUserRequest extends FormRequest
             'password' => ['required', 'max:100', 'string'],
         ];
     }
+
+    public function toCredentials(): array
+    {
+       return ['email' => $this->email, 'password' => $this->password]; 
+    }
 }

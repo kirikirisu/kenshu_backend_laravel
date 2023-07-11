@@ -10,7 +10,7 @@ class LoginUserController extends Controller
 {
     public function __invoke(LoginUserRequest $request): RedirectResponse
     {
-       $credentials = ['email' => $request->email, 'password' => $request->password];
+       $credentials = $request->toCredentials();
 
        if (Auth::attempt($credentials)) {
           $request->session()->regenerate();
