@@ -28,6 +28,9 @@ class LoginUserRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function toCredentials(): array
     {
        return ['email' => $this->email, 'password' => $this->password]; 
