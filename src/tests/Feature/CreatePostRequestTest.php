@@ -35,6 +35,7 @@ class CreatePostRequestTest extends TestCase
 
         $images = [
             '画像の入力は必須であること' => [false, 'this is title', 'this is body', 'this is thumbnail', []],
+            'svg形式の画像は入力できないこと' => [false, 'this is title', 'this is body', 'this is thumbnail', [UploadedFile::fake()->image('awsome1.svg')]],
             '画像は9枚入力できること' => [true, 'this is title', 'this is body', 'this is thumbnail', [
                 UploadedFile::fake()->image('awsome1.png'),
                 UploadedFile::fake()->image('awsome2.png'),
