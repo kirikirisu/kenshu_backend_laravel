@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -23,7 +22,7 @@ class User extends Model implements
     AuthenticatableContract,
     AuthorizableContract
 {
-    use HasUuids, Authenticatable, Authorizable;
+    use HasUuids, HasFactory, Authenticatable, Authorizable;
 
     protected $fillable = ['id', 'name', 'email', 'icon_url'];
 
