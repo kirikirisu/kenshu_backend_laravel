@@ -9,5 +9,5 @@ class Post extends Model
 {
     use HasUuids;
 
-     
+    protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail'];
 }
