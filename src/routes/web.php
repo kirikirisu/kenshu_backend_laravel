@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\RegisterUserController;
