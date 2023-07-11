@@ -18,6 +18,6 @@ class LoginUserController extends Controller
           return response()->redirectTo('/');
        }
 
-       return back();
+       return response()->redirectTo('/login');
     }
 }
