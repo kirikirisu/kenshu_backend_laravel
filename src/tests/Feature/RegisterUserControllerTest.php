@@ -5,7 +5,6 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class RegisterUserControllerTest extends TestCase

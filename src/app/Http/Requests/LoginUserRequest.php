@@ -4,13 +4,16 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $email
+ * @property string $password
+ */
 class LoginUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
     }
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -20,8 +23,16 @@ class LoginUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:100',  'string'],
+            'email' => ['required', 'email', 'max:100', 'string'],
             'password' => ['required', 'max:100', 'string'],
         ];
+    }
+
+    /**
+     * @return array{email: string, password: string}
+     */
+    public function toCredentials(): array
+    {
+       return ['email' => $this->email, 'password' => $this->password]; 
     }
 }
