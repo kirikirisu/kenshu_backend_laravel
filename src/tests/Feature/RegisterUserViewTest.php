@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class RegisterUserViewTest extends TestCase
 {
-    public function test_ユーザー登録画面にアクセスすると200が帰ってくること(): void
+    public function test_ユーザー登録画面にアクセスすると200が返ってくること(): void
     {
         $response = $this->get('/register');
 
