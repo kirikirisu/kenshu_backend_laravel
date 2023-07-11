@@ -29,7 +29,7 @@ class LoginUserRequest extends FormRequest
     }
 
     /**
-     * @return array<string, string>
+     * @return array{email: string, password: string}
      */
     public function toCredentials(): array
     {
