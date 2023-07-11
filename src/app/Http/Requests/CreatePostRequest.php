@@ -3,7 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
+/**
+ * @property string $title
+ * @property string $body
+ * @property UploadedFile $thumbnail
+ * @property UploadedFile[] $images
+ */
 class CreatePostRequest extends FormRequest
 {
     /**
@@ -29,4 +36,5 @@ class CreatePostRequest extends FormRequest
             'images.*' => ['file', 'mimes:jpeg,png', 'max:2048']
         ];
     }
+
 }
