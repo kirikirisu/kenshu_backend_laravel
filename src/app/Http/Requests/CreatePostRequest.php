@@ -37,5 +37,5 @@ class CreatePostRequest extends FormRequest
         ];
     }
 
-    public function toPost() {}
+    public function toPost(): void {}
 }
