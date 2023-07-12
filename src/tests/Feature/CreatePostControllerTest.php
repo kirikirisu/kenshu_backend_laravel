@@ -24,7 +24,7 @@ class CreatePostControllerTest extends TestCase
 
         $this->assertAuthenticatedAs($user);
         $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $response->assertRedirect('/');
     }
 
     public function test_ログインしていない状態では記事を作成できずログイン画面にリダイレクトすること(): void
@@ -40,6 +40,6 @@ class CreatePostControllerTest extends TestCase
         $response = $this->post('/posts', $data);
         
         $response->assertStatus(302);
-        $response->assertRedirectContains('/login');
+        $response->assertRedirect('/login');
     }
 }
