@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
+use App\Models\Image;
+use App\Domain\Payload\CreateImagePayload;
 
 class CreatePostController extends Controller
 {
@@ -22,8 +24,17 @@ class CreatePostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->thumbnail_url = $thumbnail_url;
+        $post->save();
 
-        if (!$post->save()) return response()->redirectTo('/')->with('failed_create_post', '投稿が失敗しました。');
+
+        // $image_payload_list = [];
+        // foreach($image_url_list as $image_url) {
+        //     $image_payload_list[] = new CreateImagePayload(post_id: $post->id, url: $image_url);
+        // }
+
+        // Image::create($image_payload_list);
+
+        // if (!$post->save()) return response()->redirectTo('/')->with('failed_create_post', '投稿が失敗しました。');
 
        return response()->redirectTo('/');
     }
