@@ -9,10 +9,10 @@ use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 
 class CreatePostController extends Controller
 {
-    public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $post_image_bin_repo): RedirectResponse
+    public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $postUploadedFileRepo): RedirectResponse
     {
-        $thumbnail_url = $post_image_bin_repo->saveThumbnail($request->thumbnail);
-        $image_url_list = $post_image_bin_repo->saveMultiImage($request->images);
+        $thumbnail_url = $postUploadedFileRepo->save($request->thumbnail);
+        $image_url_list = $postUploadedFileRepo->saveList($request->images);
 
         $post = new Post();
         $post->user_id = $request->user()->id;

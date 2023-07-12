@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 
 class PostUploadedFile implements PostUploadedFileRepositoryInterface
 {
-  public function saveThumbnail(UploadedFile $thumbnail): string 
+  public function save(UploadedFile $thumbnail): string 
   {
     return 'a';
   }
@@ -16,7 +16,7 @@ class PostUploadedFile implements PostUploadedFileRepositoryInterface
    * @param UploadedFile[] $image_list
    * @return string[]
    */
-  public function saveMultiImage(array $image_list): array
+  public function saveList(array $image_list): array
   {
     return ['a', 'b'];
   }
