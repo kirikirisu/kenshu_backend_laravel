@@ -16,7 +16,7 @@ class CreatePostController extends Controller
         $image_url_list = $post_image_bin_repo->saveMultiImage($request->images);
 
         $post = new Post();
-        $post->user_id = Auth::id();
+        $post->user_id = (string)auth()->id();
         $post->title = $request->title;
         $post->body = $request->body;
         $post->thumbnail_url = $thumbnail_url;

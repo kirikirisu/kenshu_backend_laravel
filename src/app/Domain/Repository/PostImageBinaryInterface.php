@@ -9,7 +9,7 @@ interface PostImageBinaryInterface
   public function saveThumbnail(UploadedFile $thumbnail): string;
 
   /**
-   * @param UploadedFile[]
+   * @param UploadedFile[] $image_list
    * @return string[]
    */
   public function saveMultiImage(array $image_list): array;

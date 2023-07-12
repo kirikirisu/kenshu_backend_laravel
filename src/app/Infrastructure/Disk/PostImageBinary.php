@@ -13,7 +13,7 @@ class PostImageBinary implements PostImageBinaryInterface
   }
 
   /**
-   * @param UploadedFile[]
+   * @param UploadedFile[] $image_list
    * @return string[]
    */
   public function saveMultiImage(array $image_list): array
