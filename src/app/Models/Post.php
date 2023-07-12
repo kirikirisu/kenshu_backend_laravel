@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $user_id
  * @property string $title
  * @property string $body
- * @property string $thumbnail
+ * @property string $thumbnail_url
  */
 class Post extends Model
 {
     use HasUuids;
 
-    protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail'];
+    protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail_url'];
 }

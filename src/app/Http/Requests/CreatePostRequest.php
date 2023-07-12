@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 
@@ -37,5 +38,13 @@ class CreatePostRequest extends FormRequest
         ];
     }
 
-    public function toPost(): void {}
+    public function toPost(string $user_id, string $thumbnail_url): Post {
+        $post = new Post();
+        $post->user_id = $user_id;
+        $post->title = $this->title;
+        $post->body = $this->body;
+        $post->thumbnail_url = $thumbnail_url;
+
+        return $post;
+    }
 }
