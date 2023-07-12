@@ -2,10 +2,10 @@
 
 namespace App\Infrastructure\Disk;
 
-use App\Domain\Repository\PostImageBinaryInterface;
+use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 
-class PostImageBinary implements PostImageBinaryInterface 
+class PostUploadedFile implements PostUploadedFileRepositoryInterface
 {
   public function saveThumbnail(UploadedFile $thumbnail): string 
   {

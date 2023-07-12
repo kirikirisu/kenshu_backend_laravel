@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use Illuminate\Http\UploadedFile;
 
-interface PostImageBinaryInterface
+interface PostUploadedFileRepositoryInterface
 {
   public function saveThumbnail(UploadedFile $thumbnail): string;
 

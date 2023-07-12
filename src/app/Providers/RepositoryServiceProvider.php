@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Domain\Repository\PostImageBinaryInterface;
-use App\Infrastructure\Disk\PostImageBinary;
+use App\Domain\Repository\PostUploadedFileRepositoryInterface;
+use App\Infrastructure\Disk\PostUploadedFile;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(PostImageBinaryInterface::class, PostImageBinary::class);
+        $this->app->bind(PostUploadedFileRepositoryInterface::class, PostUploadedFile::class);
     }
 
     /**

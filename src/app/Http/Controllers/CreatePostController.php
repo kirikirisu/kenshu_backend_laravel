@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Repository\PostImageBinaryInterface;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 
 class CreatePostController extends Controller
 {
-    public function __invoke(CreatePostRequest $request, PostImageBinaryInterface $post_image_bin_repo): RedirectResponse
+    public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $post_image_bin_repo): RedirectResponse
     {
         $thumbnail_url = $post_image_bin_repo->saveThumbnail($request->thumbnail);
         $image_url_list = $post_image_bin_repo->saveMultiImage($request->images);
