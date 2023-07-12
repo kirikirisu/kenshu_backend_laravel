@@ -5,8 +5,10 @@ namespace App\Http\Requests;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
+use App\Domain\Dto\CreatePostDto;
 
 /**
+ * @property string $user_id
  * @property string $title
  * @property string $body
  * @property UploadedFile $thumbnail
@@ -38,13 +40,13 @@ class CreatePostRequest extends FormRequest
         ];
     }
 
-    public function toPost(string $user_id, string $thumbnail_url): Post {
-        $post = new Post();
-        $post->user_id = $user_id;
-        $post->title = $this->title;
-        $post->body = $this->body;
-        $post->thumbnail_url = $thumbnail_url;
-
-        return $post;
+    public function toDto(): CreatePostDto {
+        return new CreatePostDto(
+            user_id: $this->user_id,
+            title: $this->title,
+            body: $this->body,
+            thumbnail: $this->thumbnail,
+            images: $this->images
+        );
     }
 }
