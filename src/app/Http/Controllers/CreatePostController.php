@@ -18,7 +18,7 @@ class CreatePostController extends Controller
         // $request->images
         // TODO: save images to images tabale
 
-        $post = $request->toPost(user_id: $user_id, thumbnail_url: $thumbnail_url);
+        $post = $request->toPost(user_id: (string)$user_id, thumbnail_url: $thumbnail_url);
         $post->save();
 
        return response()->redirectTo('/');
