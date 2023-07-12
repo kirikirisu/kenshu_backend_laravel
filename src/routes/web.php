@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Http\Controllers\CreatePostController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\RegisterUserController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,5 @@ Route::get('/login', function () {
 });
 
 Route::post('/login', LoginUserController::class);
+
+Route::post('/posts', CreatePostController::class)->middleware('auth');
