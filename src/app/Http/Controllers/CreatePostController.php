@@ -36,7 +36,10 @@ class CreatePostController extends Controller
 
             $image_payload_list = [];
             foreach($image_result_list as $image_result) {
-                $image_payload_list[] = new CreateImagePayload(post_id: $post->id, url: $image_result->saved_file_path);
+                $image_payload_list[] = [
+                  'post_id' => $post->id,
+                  'url' => $image_result->saved_file_path
+                ]; 
             }
 
             Image::create($image_payload_list);
