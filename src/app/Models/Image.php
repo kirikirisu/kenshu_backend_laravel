@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use App\Domain\Dto\FileUploadDto;
 
 /**
  * @property string $post_id
@@ -14,4 +15,21 @@ class Image extends Model
     use HasUuids;
 
     protected $fillable = ['post_id', 'url'];
+
+    /**
+     * @param string $post_id 
+     * @param FileUploadDto[] $uploaded_image_list
+     */
+    public static function bulkInsert(string $post_id, array $uploaded_image_list)
+    {
+        $image_payload_list = [];
+        foreach($uploaded_image_list as $image_result) {
+            $image_payload_list[] = [
+                'post_id' => $post_id,
+                'url' => $image_result->file_path
+            ]; 
+        }
+
+        Image::insert($image_payload_list);
+    }
 }
