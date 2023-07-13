@@ -5,7 +5,7 @@ namespace App\Infrastructure\Disk;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 
-class PostUploadedFile implements PostUploadedFileRepositoryInterface
+class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 {
   public function save(UploadedFile $thumbnail): string 
   {

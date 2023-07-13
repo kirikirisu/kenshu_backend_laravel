@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
-use App\Infrastructure\Disk\PostUploadedFile;
+use App\Infrastructure\Disk\PostUploadedFileRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(PostUploadedFileRepositoryInterface::class, PostUploadedFile::class);
+        $this->app->bind(PostUploadedFileRepositoryInterface::class, PostUploadedFileRepository::class);
     }
 
     /**
