@@ -18,8 +18,8 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
     $saved_success = $thumbnail->storeAs('public/images', $file_name);
 
     $saved_file_path = 'images/' . $file_name;
-    if (!$saved_success) return new FileUploadDto(file_name: $file_name, file_path: null, upload_success: false);
-    return new FileUploadDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
+    if ($saved_success) return new FileUploadDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
+    return new FileUploadDto(file_name: $file_name, file_path: null, upload_success: false);
   }
 
   /**
