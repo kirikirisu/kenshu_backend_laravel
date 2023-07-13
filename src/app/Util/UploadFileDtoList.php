@@ -4,15 +4,19 @@ namespace App\Util;
 
 use App\Domain\Dto\FileUploadDto;
 
-class UploadFileResultList
+class UploadFileDtoList
 {
     /**
-     * @param FileUploadDto[] $file_list
-     * @return bool
+     * @param FileUploadDto[] $upload_file_result_list 
      */
-    public static function isSuccess(array $file_list): bool
+    public function __construct(
+        public array $upload_file_result_list)
     {
-        foreach($file_list as $file)
+    }
+
+    public function isAllSuccess(): bool
+    {
+        foreach($this->upload_file_result_list as $file)
         {
             if ($file->upload_success) return false;
         }
@@ -21,14 +25,13 @@ class UploadFileResultList
     }
 
     /**
-     * @param FileUploadDto[] $file_list
      * @return FileUploadDto[]
      */
-    public static function getUploadedFile(array $file_list): array
+    public function getUploadedFile(): array
     {
         $uploaded_file = [];
 
-        foreach($file_list as $file)
+        foreach($this->upload_file_result_list as $file)
         {
             if ($file->upload_success) $uploaded_file[] = $file;
         }

@@ -10,7 +10,7 @@ use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use App\Models\Image;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Util\UploadFileResultList;
+use App\Util\UploadFileDtoList;
 
 class CreatePostController extends Controller
 {
@@ -18,8 +18,10 @@ class CreatePostController extends Controller
     {
         $thumbnail_result = $postUploadedFileRepo->save($request->thumbnail);
         if (!$thumbnail_result->upload_success) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
+
         $image_result_list = $postUploadedFileRepo->saveList($request->images);
-        if (!UploadFileResultList::isSuccess($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
+        $uploadFileDtoList = new UploadFileDtoList($image_result_list);
+        if (!$uploadFileDtoList->isAllSuccess()) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
         try {
             DB::beginTransaction();
@@ -33,7 +35,7 @@ class CreatePostController extends Controller
             $post->thumbnail_url = (string)$thumbnail_result->file_path;
             $post->save();
 
-            Image::bulkInsert(post_id: $post->id, uploaded_image_list: UploadFileResultList::getUploadedFile($image_result_list));
+            Image::bulkInsert(post_id: $post->id, uploaded_image_list: $uploadFileDtoList->getUploadedFile());
 
             DB::commit();
 
