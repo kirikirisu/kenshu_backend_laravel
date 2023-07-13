@@ -3,7 +3,7 @@
 namespace App\Domain\Repository;
 
 use Illuminate\Http\UploadedFile;
-use App\Domain\Result\FileUploadResult;
+use App\Domain\Dto\FileUploadDto;
 
 interface PostUploadedFileRepositoryInterface
 {
@@ -11,11 +11,11 @@ interface PostUploadedFileRepositoryInterface
    * @param UploadedFile $thumbnail
    * @return FileUploadResult
    */
-  public function save(UploadedFile $thumbnail): FileUploadResult;
+  public function save(UploadedFile $thumbnail): FileUploadDto;
 
   /**
    * @param UploadedFile[] $image_list
-   * @return FileUploadResult[]
+   * @return FileUploadDto[]
    */
   public function saveList(array $image_list): array;
 }

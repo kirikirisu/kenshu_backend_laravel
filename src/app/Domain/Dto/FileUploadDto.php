@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Result;
+namespace App\Domain\Dto;
 
-readonly class FileUploadResult
+readonly class FileUploadDto
 {
     public function __construct(
         public string $file_name,
