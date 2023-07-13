@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Shared;
+namespace App\Util;
 
 use App\Domain\Dto\FileUploadDto;
 

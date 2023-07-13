@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use App\Domain\Shared\UploadFileResultList;
+use App\Util\UploadFileResultList;
 use App\Domain\Dto\FileUploadDto;
 
 class UploadFileResultListTest extends TestCase
