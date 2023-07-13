@@ -17,7 +17,7 @@ class CreatePostController extends Controller
     public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $postUploadedFileRepo): RedirectResponse
     {
         $thumbnail_result = $postUploadedFileRepo->save($request->thumbnail);
-        if (!UploadFileResultList::isSuccess([$thumbnail_result])) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
+        if (!$thumbnail_result->upload_success) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
         $image_result_list = $postUploadedFileRepo->saveList($request->images);
         if (!UploadFileResultList::isSuccess($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
