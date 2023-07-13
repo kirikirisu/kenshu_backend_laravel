@@ -9,7 +9,7 @@ interface PostUploadedFileRepositoryInterface
 {
   /**
    * @param UploadedFile $thumbnail
-   * @return FileUploadResult
+   * @return FileUploadDto
    */
   public function save(UploadedFile $thumbnail): FileUploadDto;
 

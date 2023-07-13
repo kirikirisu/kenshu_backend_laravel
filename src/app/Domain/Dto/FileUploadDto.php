@@ -6,8 +6,8 @@ readonly class FileUploadDto
 {
     public function __construct(
         public string $file_name,
-        public ?string $saved_file_path,
-        public bool $status)
+        public ?string $file_path,
+        public bool $upload_success)
     {
     }
 }

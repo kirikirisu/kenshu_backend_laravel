@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use App\Models\Image;
-use App\Domain\Result\FileUploadResult;
+use App\Domain\Dto\FileUploadDto;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,7 @@ class CreatePostController extends Controller
     public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $postUploadedFileRepo): RedirectResponse
     {
         $thumbnail_result = $postUploadedFileRepo->save($request->thumbnail);
-        if (!$thumbnail_result->status) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
+        if (!$thumbnail_result->upload_success) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
         $image_result_list = $postUploadedFileRepo->saveList($request->images);
         if (!self::checkStatus($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
@@ -37,7 +37,7 @@ class CreatePostController extends Controller
             foreach($image_result_list as $image_result) {
                 $image_payload_list[] = [
                   'post_id' => $post->id,
-                  'url' => $image_result->saved_file_path
+                  'url' => $image_result->file_path
                 ]; 
             }
 
@@ -54,14 +54,14 @@ class CreatePostController extends Controller
     }
 
     /**
-     * @param FileUploadResult[] $file_list
+     * @param FileUploadDto[] $file_list
      * @return bool
      */
     private static function checkStatus(array $file_list): bool
     {
         foreach($file_list as $file)
         {
-            if ($file->status) return false;
+            if ($file->upload_success) return false;
         }
 
         return true;
