@@ -30,7 +30,7 @@ class CreatePostController extends Controller
             $post->user_id = $user->id;
             $post->title = $request->title;
             $post->body = $request->body;
-            $post->thumbnail_url = $thumbnail_result->file_name;
+            $post->thumbnail_url = $thumbnail_result->file_path;
             $post->save();
 
             $image_payload_list = [];
