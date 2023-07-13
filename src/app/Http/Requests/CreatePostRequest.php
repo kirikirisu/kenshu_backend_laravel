@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
-use App\Domain\Dto\CreatePostDto;
 
 /**
  * @property string $user_id
@@ -38,15 +36,5 @@ class CreatePostRequest extends FormRequest
             'images' => ['required', 'array', 'max:10'],
             'images.*' => ['file', 'mimes:jpeg,png', 'max:2048']
         ];
-    }
-
-    public function toDto(): CreatePostDto {
-        return new CreatePostDto(
-            user_id: $this->user_id,
-            title: $this->title,
-            body: $this->body,
-            thumbnail: $this->thumbnail,
-            images: $this->images
-        );
     }
 }
