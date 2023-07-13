@@ -42,7 +42,7 @@ class CreatePostController extends Controller
                 ]; 
             }
 
-            Image::create($image_payload_list);
+            Image::insert($image_payload_list);
 
             DB::commit();
 
