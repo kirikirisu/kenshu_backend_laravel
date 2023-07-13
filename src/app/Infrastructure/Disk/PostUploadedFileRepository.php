@@ -15,9 +15,10 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
   public function save(UploadedFile $thumbnail): FileUploadResult
   {
     $file_name = $thumbnail->getClientOriginalName();
-    $saved_file_path = $thumbnail->storeAs('', $file_name);
+    $saved_success = $thumbnail->storeAs('public/images', $file_name);
 
-    if (!$saved_file_path) $save_result_list[] = new FileUploadResult(file_name: $file_name, saved_file_path: null, status: false);
+    $saved_file_path = 'images/' . $file_name;
+    if (!$saved_success) $save_result_list[] = new FileUploadResult(file_name: $file_name, saved_file_path: null, status: false);
     return new FileUploadResult(file_name: $file_name, saved_file_path: $saved_file_path, status: true);
   }
 
@@ -30,9 +31,10 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
     $save_result_list = [];
     foreach($image_list as $image){
       $file_name = $image->getClientOriginalName();
-      $saved_file_path = $image->storeAs('', $file_name);
+      $saved_success = $image->storeAs('public/images', $file_name);
 
-      if (!$saved_file_path) $save_result_list[] = new FileUploadResult(file_name: $file_name, saved_file_path: null, status: false);
+      $saved_file_path = 'images/' . $file_name;
+      if (!$saved_success) $save_result_list[] = new FileUploadResult(file_name: $file_name, saved_file_path: null, status: false);
       $save_result_list[] = new FileUploadResult(file_name: $file_name, saved_file_path: $saved_file_path, status: true);
     }
 
