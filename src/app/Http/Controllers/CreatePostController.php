@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
@@ -14,8 +15,10 @@ class CreatePostController extends Controller
         $thumbnail_url = $postUploadedFileRepo->save($request->thumbnail);
         $image_url_list = $postUploadedFileRepo->saveList($request->images);
 
+        /** @var User $user */
+        $user = $request->user();
         $post = new Post();
-        $post->user_id = $request->user()->id;
+        $post->user_id = $user->id;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->thumbnail_url = $thumbnail_url;
