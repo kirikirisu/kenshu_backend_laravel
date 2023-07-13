@@ -20,13 +20,13 @@ class Image extends Model
      * @param string $post_id 
      * @param FileUploadDto[] $uploaded_image_list
      */
-    public static function bulkInsert(string $post_id, array $uploaded_image_list)
+    public static function bulkInsert(string $post_id, array $uploaded_image_list): void 
     {
         $image_payload_list = [];
         foreach($uploaded_image_list as $image_result) {
             $image_payload_list[] = [
                 'post_id' => $post_id,
-                'url' => $image_result->file_path
+                'url' => (string)$image_result->file_path
             ]; 
         }
 

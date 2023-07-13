@@ -2,6 +2,8 @@
 
 namespace App\Domain\Shared;
 
+use App\Domain\Dto\FileUploadDto;
+
 class UploadFileResultList
 {
     /**
@@ -22,7 +24,7 @@ class UploadFileResultList
      * @param FileUploadDto[] $file_list
      * @return FileUploadDto[]
      */
-    public static function getUploadedFile(array $file_list)
+    public static function getUploadedFile(array $file_list): array
     {
         $uploaded_file = [];
 
@@ -30,5 +32,7 @@ class UploadFileResultList
         {
             if ($file->upload_success) $uploaded_file[] = $file;
         }
+
+        return $uploaded_file;
     }
 }
