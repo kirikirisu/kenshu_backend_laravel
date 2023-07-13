@@ -8,7 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use App\Models\Image;
-use App\Domain\Payload\CreateImagePayload;
 use App\Domain\Result\FileUploadResult;
 use Exception;
 use Illuminate\Support\Facades\DB;
