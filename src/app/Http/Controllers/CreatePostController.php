@@ -8,18 +8,18 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use App\Models\Image;
-use App\Domain\Dto\FileUploadDto;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Domain\Shared\UploadFileResultList;
 
 class CreatePostController extends Controller
 {
     public function __invoke(CreatePostRequest $request, PostUploadedFileRepositoryInterface $postUploadedFileRepo): RedirectResponse
     {
         $thumbnail_result = $postUploadedFileRepo->save($request->thumbnail);
-        if (!$thumbnail_result->upload_success) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
+        if (!UploadFileResultList::isSuccess([$thumbnail_result])) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
         $image_result_list = $postUploadedFileRepo->saveList($request->images);
-        if (!self::checkStatus($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
+        if (!UploadFileResultList::isSuccess($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
         try {
             DB::beginTransaction();
@@ -33,7 +33,7 @@ class CreatePostController extends Controller
             $post->thumbnail_url = $thumbnail_result->file_path;
             $post->save();
 
-            Image::bulkInsert(post_id: $post->id, uploaded_image_list: $image_result_list);
+            Image::bulkInsert(post_id: $post->id, uploaded_image_list: UploadFileResultList::getUploadedFile($image_result_list));
 
             DB::commit();
 
@@ -45,17 +45,4 @@ class CreatePostController extends Controller
         }
     }
 
-    /**
-     * @param FileUploadDto[] $file_list
-     * @return bool
-     */
-    private static function checkStatus(array $file_list): bool
-    {
-        foreach($file_list as $file)
-        {
-            if ($file->upload_success) return false;
-        }
-
-        return true;
-    }
 }
