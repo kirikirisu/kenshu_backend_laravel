@@ -22,7 +22,6 @@ class CreatePostController extends Controller
         $image_result_list = $postUploadedFileRepo->saveList($request->images);
         if (!self::checkStatus($image_result_list)) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
-
         try {
             DB::beginTransaction();
 
