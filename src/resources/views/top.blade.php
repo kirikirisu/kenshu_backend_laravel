@@ -27,7 +27,7 @@
             }
         }
     </script>
-    <form action="/" method="post" enctype="multipart/form-data" class="w-2/5">
+    <form action="/posts" method="post" enctype="multipart/form-data" class="w-2/5">
         <label for="title" class="block text-base font-semibold">タイトル</label>
         <div class="mt-2">
             <input id="title" aria-label="title for post" type="text" name="title"
