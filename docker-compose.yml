@@ -30,7 +30,7 @@ services:
       - "MYSQL_USER=laravel"
       - "MYSQL_PASSWORD=password"
     volumes:
-      - "./container/db/my.conf:/etc/my.conf"
+      - "./container/db/my.cnf:/etc/my.cnf"
       - "mysql-data:/var/lib/mysql"
 volumes:
   mysql-data:
