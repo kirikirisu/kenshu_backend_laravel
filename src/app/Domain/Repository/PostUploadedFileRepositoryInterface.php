@@ -4,6 +4,7 @@ namespace App\Domain\Repository;
 
 use Illuminate\Http\UploadedFile;
 use App\Domain\Dto\UploadFileDto;
+use App\Util\UploadFileDtoList;
 
 interface PostUploadedFileRepositoryInterface
 {
@@ -15,7 +16,7 @@ interface PostUploadedFileRepositoryInterface
 
   /**
    * @param UploadedFile[] $image_list
-   * @return UploadFileDto[]
+   * @return UploloadFileDtoList
    */
-  public function saveList(array $image_list): array;
+  public function saveList(array $image_list): UploadFileDtoList;
 }

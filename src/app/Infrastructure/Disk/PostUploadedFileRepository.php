@@ -5,6 +5,7 @@ namespace App\Infrastructure\Disk;
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 use App\Domain\Dto\UploadFileDto;
+use App\Util\UploadFileDtoList;
 
 class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 {
@@ -24,9 +25,9 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 
   /**
    * @param UploadedFile[] $image_list
-   * @return FileUploadDto[]
+   * @return UploadFileDtoList
    */
-  public function saveList(array $image_list): array
+  public function saveList(array $image_list): UploadFileDtoList
   {
     $save_result_list = [];
     foreach($image_list as $image){
@@ -41,6 +42,6 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
       }
     }
 
-    return $save_result_list;
+    return new UploadFileDtoList($save_result_list);
   }
 }

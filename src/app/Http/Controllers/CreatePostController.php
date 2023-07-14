@@ -19,8 +19,7 @@ class CreatePostController extends Controller
         $thumbnail_result = $postUploadedFileRepo->save($request->thumbnail);
         if (!$thumbnail_result->upload_success) return response()->redirectTo('/')->with('failed_create_post', 'サムネイルのアップロードに失敗し投稿が失敗しました。');
 
-        $image_result_list = $postUploadedFileRepo->saveList($request->images);
-        $uploadFileDtoList = new UploadFileDtoList($image_result_list);
+        $uploadFileDtoList = $postUploadedFileRepo->saveList($request->images); 
         if (!$uploadFileDtoList->isAllSuccess()) return response()->redirectTo('/')->with('failed_create_post', '画像のアップロードに失敗し投稿が失敗しました。');
 
         try {
