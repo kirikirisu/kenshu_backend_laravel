@@ -2,7 +2,7 @@
 
 namespace App\Domain\Dto;
 
-readonly class FileUploadDto
+readonly class UploadFileDto 
 {
     public function __construct(
         public string $file_name,

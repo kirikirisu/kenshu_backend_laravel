@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Mockery;
 use Mockery\MockInterface;
 use App\Infrastructure\Disk\PostUploadedFileRepository;
-use App\Domain\Dto\FileUploadDto;
+use App\Domain\Dto\UploadFileDto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreatePostControllerTest extends TestCase
@@ -25,10 +25,10 @@ class CreatePostControllerTest extends TestCase
     public function test_ログイン状態で記事を作成でき作成後トップページにリダイレクトすること(): void
     {
         $this->partialMock(PostUploadedFileRepository::class, function (MockInterface $mock) {
-            $mock->shouldReceive('save')->once()->andReturn(new FIleUploadDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
+            $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
             $mock->shouldReceive('saveList')->once()->andReturn([
-                new FileUploadDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
-                new FileUploadDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
+                new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
+                new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
             ]);
         });
 
@@ -71,7 +71,7 @@ class CreatePostControllerTest extends TestCase
     public function test_サムネイルがアップロードできなかった場合に投稿が失敗し、トップページにリダイレクトすること(): void
     {
         $this->partialMock(PostUploadedFileRepository::class, function (MockInterface $mock) {
-            $mock->shouldReceive('save')->once()->andReturn(new FileUploadDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: false));
+            $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: false));
             $mock->shouldNotHaveReceived('saveList');
         });
 
@@ -100,11 +100,11 @@ class CreatePostControllerTest extends TestCase
     public function test_複数アップロードされた画像がどれか一つでもアップロードできなかった場合に投稿が失敗し、トップページにリダイレクトすること(): void
     {
         $this->partialMock(PostUploadedFileRepository::class, function (MockInterface $mock) {
-            $mock->shouldReceive('save')->once()->andReturn(new FileUploadDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
+            $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
             $mock->shouldReceive('saveList')->once()->andReturn([
-                new FileUploadDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
-                new FileUploadDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
-                new FileUploadDto(file_name: "image3.png", file_path: "images/image3.png", upload_success: false),
+                new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
+                new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
+                new UploadFileDto(file_name: "image3.png", file_path: "images/image3.png", upload_success: false),
             ]);
         });
 

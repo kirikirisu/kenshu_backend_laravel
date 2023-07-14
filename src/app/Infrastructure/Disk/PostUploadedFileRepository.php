@@ -4,7 +4,7 @@ namespace App\Infrastructure\Disk;
 
 use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use Illuminate\Http\UploadedFile;
-use App\Domain\Dto\FileUploadDto;
+use App\Domain\Dto\UploadFileDto;
 
 class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 {
@@ -12,14 +12,14 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
    * @param UploadedFile $thumbnail
    * @return FileUploadDto
    */
-  public function save(UploadedFile $thumbnail): FileUploadDto 
+  public function save(UploadedFile $thumbnail): UploadFileDto
   {
     $file_name = $thumbnail->getClientOriginalName();
     $saved_success = $thumbnail->storeAs('public/images', $file_name);
 
     $saved_file_path = 'images/' . $file_name;
-    if ($saved_success) return new FileUploadDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
-    return new FileUploadDto(file_name: $file_name, file_path: null, upload_success: false);
+    if ($saved_success) return new UploadFileDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
+    return new UploadFileDto(file_name: $file_name, file_path: null, upload_success: false);
   }
 
   /**
@@ -35,9 +35,9 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 
       $saved_file_path = 'images/' . $file_name;
       if ($saved_success) {
-        $save_result_list[] = new FileUploadDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
+        $save_result_list[] = new UploadFileDto(file_name: $file_name, file_path: $saved_file_path, upload_success: true);
       } else {
-        $save_result_list[] = new FileUploadDto(file_name: $file_name, file_path: null, upload_success: false);
+        $save_result_list[] = new UploadFileDto(file_name: $file_name, file_path: null, upload_success: false);
       }
     }
 
