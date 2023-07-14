@@ -19,8 +19,14 @@ jobs:
 
       - name: Init
         run: |
+          docker compose exec laravel cp .env.local .env
           docker compose exec laravel composer install
+          docker compose exec migrate
 
       - name: Run lint
         run: |
           docker compose exec laravel composer larastan
+
+      - name: Run test
+        run: |
+          docker compose exec laravel php artisan test
