@@ -19,7 +19,7 @@ jobs:
 
       - name: Init
         run: |
-          docker compose exec laravel cp .env.local .env
+          docker compose exec laravel cp .env.example .env
           docker compose exec laravel composer install
           docker compose exec migrate
 
