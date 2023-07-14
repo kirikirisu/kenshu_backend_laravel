@@ -3,8 +3,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Infrastructure\Disk\PostUploadedFileRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -38,9 +36,9 @@ class PostUploadedFileRepositoryTest extends TestCase
         UploadedFile::fake()->image('thumbnail3.png'),
       ];
       $postUploadFileRepository = new PostUploadedFileRepository();
-      $upload_result_list = $postUploadFileRepository->saveList($files);
+      $uploadFileDtoList = $postUploadFileRepository->saveList($files);
 
-      foreach($upload_result_list as $i => $upload_result) {
+      foreach($uploadFileDtoList->filterSuccess() as $i => $upload_result) {
         $file_name = 'thumbnail'. $i + 1 . '.png';
 
         Storage::disk('local')->exists($file_name);

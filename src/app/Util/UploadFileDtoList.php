@@ -27,7 +27,7 @@ class UploadFileDtoList
     /**
      * @return UploadFileDto[]
      */
-    public function getUploadedFile(): array
+    public function filterSuccess(): array
     {
         $uploaded_file = [];
 

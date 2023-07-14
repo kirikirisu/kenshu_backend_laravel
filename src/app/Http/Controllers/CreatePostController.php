@@ -33,7 +33,7 @@ class CreatePostController extends Controller
             $post->thumbnail_url = (string)$thumbnail_result->file_path;
             $post->save();
 
-            Image::bulkInsert(post_id: $post->id, uploaded_image_list: $uploadFileDtoList->getUploadedFile());
+            Image::bulkInsert(post_id: $post->id, uploaded_image_list: $uploadFileDtoList->filterSuccess());
 
             DB::commit();
 

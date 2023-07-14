@@ -11,6 +11,7 @@ use Mockery\MockInterface;
 use App\Infrastructure\Disk\PostUploadedFileRepository;
 use App\Domain\Dto\UploadFileDto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Util\UploadFileDtoList;
 
 class CreatePostControllerTest extends TestCase
 {
@@ -26,10 +27,12 @@ class CreatePostControllerTest extends TestCase
     {
         $this->partialMock(PostUploadedFileRepository::class, function (MockInterface $mock) {
             $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
-            $mock->shouldReceive('saveList')->once()->andReturn([
-                new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
-                new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
-            ]);
+            $mock->shouldReceive('saveList')->once()->andReturn(
+                new UploadFileDtoList([
+                   new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
+                   new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true)]
+                )
+            );
         });
 
         $thumbnail_img = UploadedFile::fake()->image('thumbnail.png');
@@ -101,11 +104,12 @@ class CreatePostControllerTest extends TestCase
     {
         $this->partialMock(PostUploadedFileRepository::class, function (MockInterface $mock) {
             $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
-            $mock->shouldReceive('saveList')->once()->andReturn([
-                new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
-                new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
-                new UploadFileDto(file_name: "image3.png", file_path: "images/image3.png", upload_success: false),
-            ]);
+            $mock->shouldReceive('saveList')->once()->andReturn(
+                new UploadFileDtoList([
+                   new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
+                   new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true),
+                   new UploadFileDto(file_name: "image3.png", file_path: "images/image3.png", upload_success: false)]
+                ));
         });
 
         $thumbnail_img = UploadedFile::fake()->image('thumbnail.png');

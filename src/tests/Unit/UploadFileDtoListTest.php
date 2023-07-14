@@ -6,9 +6,8 @@ namespace Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use App\Util\UploadFileDtoList;
 use App\Domain\Dto\UploadFileDto;
-use GuzzleHttp\Psr7\UploadedFile;
 
-class UploadFileResultListTest extends TestCase
+class UploadFileDtoListTest extends TestCase
 {
     public function test_一つでもアップロードが失敗しているとfalseを返すこと(): void
     {
@@ -32,7 +31,7 @@ class UploadFileResultListTest extends TestCase
            new UploadFileDto(file_name: 'thumbnail5.png', file_path: 'public/images/thumbnail5.png', upload_success: true),
         ]);
 
-        $result = $uploadFileDtoList->getUploadedFile();
+        $result = $uploadFileDtoList->filterSuccess();
 
         $this->assertEquals(count($result), 3);
     }
