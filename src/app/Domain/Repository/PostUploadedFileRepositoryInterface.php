@@ -16,7 +16,7 @@ interface PostUploadedFileRepositoryInterface
 
   /**
    * @param UploadedFile[] $image_list
-   * @return UploloadFileDtoList
+   * @return UploadFileDtoList
    */
   public function saveList(array $image_list): UploadFileDtoList;
 }

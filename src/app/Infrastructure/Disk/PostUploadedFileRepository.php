@@ -11,7 +11,7 @@ class PostUploadedFileRepository implements PostUploadedFileRepositoryInterface
 {
   /**
    * @param UploadedFile $thumbnail
-   * @return FileUploadDto
+   * @return UploadFileDto
    */
   public function save(UploadedFile $thumbnail): UploadFileDto
   {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use App\Domain\Dto\FileUploadDto;
+use App\Domain\Dto\UploadFileDto;
 
 /**
  * @property string $post_id
@@ -18,7 +18,7 @@ class Image extends Model
 
     /**
      * @param string $post_id 
-     * @param FileUploadDto[] $uploaded_image_list
+     * @param UploadFileDto[] $uploaded_image_list
      */
     public static function bulkInsert(string $post_id, array $uploaded_image_list): void 
     {

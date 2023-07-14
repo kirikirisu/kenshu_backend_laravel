@@ -10,7 +10,6 @@ use App\Domain\Repository\PostUploadedFileRepositoryInterface;
 use App\Models\Image;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Util\UploadFileDtoList;
 
 class CreatePostController extends Controller
 {

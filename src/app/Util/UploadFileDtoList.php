@@ -2,12 +2,12 @@
 
 namespace App\Util;
 
-use App\Domain\Dto\FileUploadDto;
+use App\Domain\Dto\UploadFileDto;
 
 class UploadFileDtoList
 {
     /**
-     * @param FileUploadDto[] $upload_file_result_list 
+     * @param UploadFileDto[] $upload_file_result_list 
      */
     public function __construct(
         public array $upload_file_result_list)
@@ -25,7 +25,7 @@ class UploadFileDtoList
     }
 
     /**
-     * @return FileUploadDto[]
+     * @return UploadFileDto[]
      */
     public function getUploadedFile(): array
     {
