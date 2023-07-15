@@ -45,7 +45,8 @@ class CreatePostControllerTest extends TestCase
             'images' => [
                 UploadedFile::fake()->image('awsome1.png'),
                 UploadedFile::fake()->image('awsome2.png'),
-            ]
+            ],
+            'categories' => ['総合','グルメ','スポーツ']
         ];
 
         $response = $this->actingAs($user)->post('/posts', $data);
@@ -63,7 +64,8 @@ class CreatePostControllerTest extends TestCase
             'title' => 'hoge',
             'body' => 'huga',
             'thumbnail' => $thumbnail_img,
-            'images' => [$thumbnail_img]
+            'images' => [$thumbnail_img],
+            'categories' => ['総合','グルメ','スポーツ']
         ];
         $response = $this->post('/posts', $data);
         
@@ -89,7 +91,8 @@ class CreatePostControllerTest extends TestCase
                 UploadedFile::fake()->image('awsome1.png'),
                 UploadedFile::fake()->image('awsome2.png'),
                 UploadedFile::fake()->image('awsome3.png'),
-            ]
+            ],
+            'categories' => ['総合','グルメ','スポーツ']
         ];
 
         $response = $this->actingAs($user)->post('/posts', $data);
@@ -123,7 +126,8 @@ class CreatePostControllerTest extends TestCase
                 UploadedFile::fake()->image('awsome1.png'),
                 UploadedFile::fake()->image('awsome2.png'),
                 UploadedFile::fake()->image('awsome3.png'),
-            ]
+            ],
+            'categories' => ['総合','グルメ','スポーツ']
         ];
 
         $response = $this->actingAs($user)->post('/posts', $data);
