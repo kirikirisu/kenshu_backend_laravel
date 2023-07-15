@@ -99,7 +99,22 @@ class CreatePostRequestTest extends TestCase
             ],
         ];
 
-        return [...$title, ...$body, ...$thumbnail, ...$images];
+        $categories = [
+            'タグの入力は必須であること' => [false, 'this is title', 'this is body value', $thumbnail_img, 
+                [UploadedFile::fake()->image('awsome1.png')], 
+                []],
+            'タグは4つ入力できること' => [true, 'this is title', 'this is body value', $thumbnail_img, 
+                [UploadedFile::fake()->image('awsome1.png')], 
+                ['総合', 'グルメ', 'スポーツ', 'ファッション']],
+            'タグは5つ入力できること' => [true, 'this is title', 'this is body value', $thumbnail_img, 
+                [UploadedFile::fake()->image('awsome1.png')], 
+                ['総合', 'グルメ', 'スポーツ', 'ファッション', 'テクノロジー']],
+            'タグは6つ入力できないこと' => [false, 'this is title', 'this is body value', $thumbnail_img, 
+                [UploadedFile::fake()->image('awsome1.png')], 
+                ['総合', 'グルメ', 'スポーツ', 'ファッション', 'テクノロジー', 'エンタメ']],
+        ];
+
+        return [...$title, ...$body, ...$thumbnail, ...$images, ...$categories];
     }
 
     #[DataProvider('dataProvider')]
