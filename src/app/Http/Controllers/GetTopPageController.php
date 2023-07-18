@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 use App\Models\Tag;
 
 class GetTopPageController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(): View
     {
         $tags = Tag::all();
 
