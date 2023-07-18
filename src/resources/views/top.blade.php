@@ -56,15 +56,10 @@
                 onchange="fileDrop(event, 'input')">
         </div>
         <div class="mt-6">
-            <label><input type="checkbox" name="tags[]" value="1">総合</label>
-            <label><input type="checkbox" name="tags[]" value="2">テクノロジー</label>
-            <label><input type="checkbox" name="tags[]" value="3">モバイル</label>
-            <label><input type="checkbox" name="tags[]" value="4">アプリ</label>
-            <label><input type="checkbox" name="tags[]" value="5">エンタメ</label>
-            <label><input type="checkbox" name="tags[]" value="6">ビューティー</label>
-            <label><input type="checkbox" name="tags[]" value="7">ファッション</label>
-            <label><input type="checkbox" name="tags[]" value="8">ライフスタイル</label>
-            <label><input type="checkbox" name="tags[]" value="9">ビジネス</label>
+            <label class="block text-base font-semibold">タグ</label>
+            @foreach ($tags as $tag)
+                <label><input type="checkbox" name="tags[]" value={{ $tag->name }}>{{ $tag->name }}</label>
+            @endforeach
         </div>
         </div>
         <div id="uploadImageArea" class="flex"></div>
