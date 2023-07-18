@@ -36,7 +36,7 @@ class CreatePostRequest extends FormRequest
             'images' => ['required', 'array', 'max:10'],
             'images.*' => ['file', 'mimes:jpeg,png', 'max:2048'],
             'tags' => ['required', 'array', 'max:5'],
-            'tags.*' => ['distinct', 'string', 'in:総合,テクノロジー,モバイル,アプリ,エンタメ,ビューティー,ファッション,ライフスタイル,ビジネス,グルメ,スポーツ']
+            'tags.*' => ['distinct', 'string']
         ];
     }
 }
