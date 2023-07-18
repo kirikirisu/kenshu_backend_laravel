@@ -99,7 +99,7 @@ class CreatePostRequestTest extends TestCase
             ],
         ];
 
-        $categories = [
+        $tags = [
             'タグの入力は必須であること' => [false, 'this is title', 'this is body value', $thumbnail_img, 
                 [UploadedFile::fake()->image('awsome1.png')], 
                 []],
@@ -114,11 +114,11 @@ class CreatePostRequestTest extends TestCase
                 ['総合', 'グルメ', 'スポーツ', 'ファッション', 'テクノロジー', 'エンタメ']],
         ];
 
-        return [...$title, ...$body, ...$thumbnail, ...$images, ...$categories];
+        return [...$title, ...$body, ...$thumbnail, ...$images, ...$tags];
     }
 
     #[DataProvider('dataProvider')]
-    public function testValidateRules(bool $expected, string $title, string $body, ?File $thumnail, array $files, array $categories): void
+    public function testValidateRules(bool $expected, string $title, string $body, ?File $thumnail, array $files, array $tags): void
     {
         $request = new CreatePostRequest();
 
@@ -127,7 +127,7 @@ class CreatePostRequestTest extends TestCase
                 'body' => $body,
                 'thumbnail' => $thumnail,
                 'images' => $files,
-                'categories' => $categories
+                'tags' => $tags
                 ],
                 $request->rules(),
                 $request->messages());
