@@ -36,7 +36,7 @@ class CreatePostRequest extends FormRequest
             'images' => ['required', 'array', 'max:10'],
             'images.*' => ['file', 'mimes:jpeg,png', 'max:2048'],
             'categories' => ['required', 'array', 'max:5'],
-            'categories.*' => ['string', 'in:総合,テクノロジー,モバイル,アプリ,エンタメ,ビューティー,ファッション,ライフスタイル,ビジネス,グルメ,スポーツ']
+            'categories.*' => ['distinct', 'string', 'in:総合,テクノロジー,モバイル,アプリ,エンタメ,ビューティー,ファッション,ライフスタイル,ビジネス,グルメ,スポーツ']
         ];
     }
 }
