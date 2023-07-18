@@ -58,7 +58,7 @@
         <div class="mt-6">
             <label class="block text-base font-semibold">タグ</label>
             @foreach ($tags as $tag)
-                <label><input type="checkbox" name="tags[]" value={{ $tag->name }}>{{ $tag->name }}</label>
+                <label><input type="checkbox" name="tags[]" value={{ $tag->id }}>{{ $tag->name }}</label>
             @endforeach
         </div>
         </div>
