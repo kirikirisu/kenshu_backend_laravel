@@ -112,6 +112,9 @@ class CreatePostRequestTest extends TestCase
             'タグは6つ入力できないこと' => [false, 'this is title', 'this is body value', $thumbnail_img, 
                 [UploadedFile::fake()->image('awsome1.png')], 
                 ['総合', 'グルメ', 'スポーツ', 'ファッション', 'テクノロジー', 'エンタメ']],
+            '同じタグは複数入力できないこと' => [false, 'this is title', 'this is body value', $thumbnail_img, 
+                [UploadedFile::fake()->image('awsome1.png')], 
+                ['総合', '総合', 'エンタメ']],
         ];
 
         return [...$title, ...$body, ...$thumbnail, ...$images, ...$tags];
