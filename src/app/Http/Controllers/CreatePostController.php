@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreatePostRequest;
@@ -34,6 +35,7 @@ class CreatePostController extends Controller
             $post->save();
 
             Image::bulkInsert(post_id: $post->id, uploaded_image_list: $uploadFileDtoList->filterSuccess());
+            PostTag::bulkInsert(post_id: $post->id, tag_id_list: $request->tags);
 
             DB::commit();
 
