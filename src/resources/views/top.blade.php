@@ -28,6 +28,7 @@
         }
     </script>
     <form action="/posts" method="post" enctype="multipart/form-data" class="w-2/5">
+        @csrf
         <label for="title" class="block text-base font-semibold">タイトル</label>
         <div class="mt-2">
             <input id="title" aria-label="title for post" type="text" name="title"
@@ -53,6 +54,18 @@
             </div>
             <input id="fileInput" multiple type="file" accept="image/*" value="投稿画像を選択" name="images[]"
                 onchange="fileDrop(event, 'input')">
+        </div>
+        <div class="mt-6">
+            <label><input type="checkbox" name="tags[]" value="1">総合</label>
+            <label><input type="checkbox" name="tags[]" value="2">テクノロジー</label>
+            <label><input type="checkbox" name="tags[]" value="3">モバイル</label>
+            <label><input type="checkbox" name="tags[]" value="4">アプリ</label>
+            <label><input type="checkbox" name="tags[]" value="5">エンタメ</label>
+            <label><input type="checkbox" name="tags[]" value="6">ビューティー</label>
+            <label><input type="checkbox" name="tags[]" value="7">ファッション</label>
+            <label><input type="checkbox" name="tags[]" value="8">ライフスタイル</label>
+            <label><input type="checkbox" name="tags[]" value="9">ビジネス</label>
+        </div>
         </div>
         <div id="uploadImageArea" class="flex"></div>
         <button type="submit"
