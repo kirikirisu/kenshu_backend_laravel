@@ -13,6 +13,7 @@ class UpdatePostController extends Controller
         /** @var string $post_id */
         $post_id = $request->route('id');
 
+        /** @var Post $post */
         $post = Post::find($post_id);
         $post->title = $request->title;
         $post->body = $request->body;
