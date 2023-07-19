@@ -13,8 +13,9 @@ class UpdatePostController extends Controller
         /** @var string $post_id */
         $post_id = $request->route('id');
 
-        /** @var Post $post */
-        $post = Post::find($post_id);
+        $post = Post::query()->find($post_id);
+        if (is_null($post)) return response()->redirectTo("/")->with('failed_update_post', '投稿が見つかりませんでした。');
+
         $post->title = $request->title;
         $post->body = $request->body;
 
