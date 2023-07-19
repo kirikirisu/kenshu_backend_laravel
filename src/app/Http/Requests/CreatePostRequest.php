@@ -11,6 +11,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $body
  * @property UploadedFile $thumbnail
  * @property UploadedFile[] $images
+ * @property string[] $tags
  */
 class CreatePostRequest extends FormRequest
 {
