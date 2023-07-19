@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Dto\UploadFileDto;
+use Illuminate\Support\Str;
 
 /**
  * @property string $post_id
@@ -25,6 +26,7 @@ class Image extends Model
         $image_payload_list = [];
         foreach($uploaded_image_list as $image_result) {
             $image_payload_list[] = [
+                'id' => Str::uuid(),
                 'post_id' => $post_id,
                 'url' => (string)$image_result->file_path
             ]; 
