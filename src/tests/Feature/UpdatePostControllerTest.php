@@ -13,16 +13,6 @@ class UpdatePostControllerTest extends TestCase
 {
     public function test_ログイン状態で記事を編集でき、編集後は記事詳細ページにリダイレクトすること(): void
     {
-        // $this->mock(PostUploadedFileRepository::class, function (MockInterface $mock) {
-        //     $mock->shouldReceive('save')->once()->andReturn(new UploadFileDto(file_name: "thumbnai.png", file_path: "images/thumbnail.png", upload_success: true));
-        //     $mock->shouldReceive('saveList')->once()->andReturn(
-        //         new UploadFileDtoList([
-        //            new UploadFileDto(file_name: "image1.png", file_path: "images/image1.png", upload_success: true),
-        //            new UploadFileDto(file_name: "image2.png", file_path: "images/image2.png", upload_success: true)]
-        //         )
-        //     );
-        // });
-
         $request_url = '/posts/' . 10;
         $thumbnail_img = UploadedFile::fake()->image('thumbnail.png');
         $user = User::factory()->create();
