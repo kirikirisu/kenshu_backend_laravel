@@ -4,6 +4,7 @@ use App\Http\Controllers\CreatePostController;
 use App\Http\Controllers\GetTopPageController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\UpdatePostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::get('/login', function () {
 Route::post('/login', LoginUserController::class);
 
 Route::post('/posts', CreatePostController::class)->middleware('auth');
+
+Route::patch('/posts', UpdatePostController::class)->middleware('auth');
