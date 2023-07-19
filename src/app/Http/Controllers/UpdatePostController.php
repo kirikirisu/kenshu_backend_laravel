@@ -10,6 +10,7 @@ class UpdatePostController extends Controller
 {
     public function __invoke(UpdatePostRequest $request): RedirectResponse 
     {
+        /** @var string $post_id */
         $post_id = $request->route('id');
 
         Post::where('id', $post_id)->update([
@@ -17,6 +18,6 @@ class UpdatePostController extends Controller
             'body' => $request->body
         ]);
 
-        return response()->redirectTo('/posts/' . $post_id);
+        return response()->redirectTo("/posts/$post_id");
     }
 }
