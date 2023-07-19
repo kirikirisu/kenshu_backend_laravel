@@ -13,11 +13,14 @@ class UpdatePostController extends Controller
         /** @var string $post_id */
         $post_id = $request->route('id');
 
-        Post::where('id', $post_id)->update([
-            'title' => $request->title,
-            'body' => $request->body
-        ]);
+        $post = Post::find($post_id);
+        $post->title = $request->title;
+        $post->body = $request->body;
 
-        return response()->redirectTo("/posts/$post_id");
+        if ($post->save()) {
+            return response()->redirectTo("/posts/$post_id");
+        }
+
+        return response()->redirectTo("/")->with('failed_update_post', '投稿の更新に失敗しました。');
     }
 }

@@ -4,15 +4,17 @@ namespace Tests\Feature;
 
 use Illuminate\Http\UploadedFile;
 use App\Models\User;
+use App\Models\Post;
 use Tests\TestCase;
 
 class UpdatePostControllerTest extends TestCase
 {
     public function test_ログイン状態で記事を編集でき、編集後は記事詳細ページにリダイレクトすること(): void
     {
-        $request_url = '/posts/' . 10;
         $thumbnail_img = UploadedFile::fake()->image('thumbnail.png');
         $user = User::factory()->create();
+        $post = Post::factory()->create(['user_id' => $user->id]);
+        $request_url = '/posts/' . $post->id;
 
         $data = [
             'title' => 'hoge',
