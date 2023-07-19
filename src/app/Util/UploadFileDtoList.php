@@ -18,7 +18,7 @@ class UploadFileDtoList
     {
         foreach($this->upload_file_result_list as $file)
         {
-            if ($file->upload_success) return false;
+            if (!$file->upload_success) return false;
         }
 
         return true;

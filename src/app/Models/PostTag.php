@@ -18,7 +18,7 @@ class PostTag extends Model
     public static function bulkInsert(string $post_id, array $tag_id_list): void
     {
         $tag_payload_list = [];
-        foreach($$tag_id_list as $tag_id) {
+        foreach($tag_id_list as $tag_id) {
             $tag_payload_list[] = [
                 'post_id' => $post_id,
                 'tag_id' => $tag_id
