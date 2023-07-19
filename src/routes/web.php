@@ -34,4 +34,4 @@ Route::post('/login', LoginUserController::class);
 
 Route::post('/posts', CreatePostController::class)->middleware('auth');
 
-Route::patch('/posts', UpdatePostController::class)->middleware('auth');
+Route::patch('/posts/{id}', UpdatePostController::class)->middleware('auth');
