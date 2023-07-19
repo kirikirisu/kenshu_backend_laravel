@@ -1,11 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Domain\Dto\UploadFileDto;
 use Illuminate\Http\UploadedFile;
-use App\Util\UploadFileDtoList;
-use Mockery\MockInterface;
 use App\Models\User;
 use Tests\TestCase;
 
