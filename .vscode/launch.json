@@ -10,7 +10,7 @@
       "request": "launch",
       "port": 9003,
       "pathMappings": {
-        "/var/www/html": "/Users/k-kirisawa/WorkSpace/Kenshu/kenshu-backend-laravel/src"
+        "/var/www/html": "${workspaceRoot}/src"
       }
     },
     {
