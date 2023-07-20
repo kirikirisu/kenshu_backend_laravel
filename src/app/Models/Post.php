@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasUuids, HasFactory;
+
+    protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail_url'];
 
     /**
      * @return HasMany<Image>
@@ -35,5 +38,12 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }
 
-    protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail_url'];
+    /**
+     * @return BelongsTo<User>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
