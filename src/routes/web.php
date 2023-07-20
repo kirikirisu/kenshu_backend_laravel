@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use App\Http\Controllers\CreatePostController;
+use App\Http\Controllers\DeletePostController;
 use App\Http\Controllers\GetTopPageController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\RegisterUserController;
@@ -35,3 +36,5 @@ Route::post('/login', LoginUserController::class);
 Route::post('/posts', CreatePostController::class)->middleware('auth');
 
 Route::patch('/posts/{id}', UpdatePostController::class)->middleware('auth');
+
+Route::delete('/posts/{id}', DeletePostController::class)->middleware('auth')->name('posts.destroy');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Dto\UploadFileDto;
 use Illuminate\Support\Str;
@@ -16,6 +17,14 @@ class Image extends Model
     use HasUuids;
 
     protected $fillable = ['post_id', 'url'];
+
+    /**
+     * @return BelongsTo<Post, Image>
+     */
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
+    }
 
     /**
      * @param string $post_id 
