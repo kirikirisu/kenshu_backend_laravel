@@ -20,7 +20,7 @@ class DeletePostController extends Controller
 
             $post = Post::query()->find($post_id);
             if (is_null($post)) {
-              DB::commit();
+              DB::rollBack();
               return response()->redirectTo("/")->with('failed_delete_post', '投稿が見つかりませんでした。');
             }
 
