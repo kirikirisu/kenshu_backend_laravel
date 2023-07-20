@@ -5,12 +5,8 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Image;
-use App\Models\PostTag;
-use App\Models\Tag;
 use Tests\TestCase;
 
 class DeletePostControllerTest extends TestCase
