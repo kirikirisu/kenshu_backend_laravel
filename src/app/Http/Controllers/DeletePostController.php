@@ -25,7 +25,6 @@ class DeletePostController extends Controller
 
             Image::query()->where('post_id', $post->id)->delete();
             PostTag::query()->where('post_id', $post_id)->delete();
-
             $post->delete();
 
             DB::commit();

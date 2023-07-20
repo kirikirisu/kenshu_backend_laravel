@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use App\Models\User;
 use App\Models\Post;
@@ -9,6 +10,8 @@ use Tests\TestCase;
 
 class UpdatePostControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_ログイン状態で記事を編集でき、編集後は記事詳細ページにリダイレクトすること(): void
     {
         $thumbnail_img = UploadedFile::fake()->image('thumbnail.png');
