@@ -55,6 +55,7 @@
             <input id="fileInput" multiple type="file" accept="image/*" value="投稿画像を選択" name="images[]"
                 onchange="fileDrop(event, 'input')">
         </div>
+        <div id="uploadImageArea" class="flex"></div>
         <div class="mt-6">
             <label class="block text-base font-semibold">タグ</label>
             @foreach ($tags as $tag)
@@ -62,10 +63,41 @@
             @endforeach
         </div>
         </div>
-        <div id="uploadImageArea" class="flex"></div>
         <button type="submit"
             class="mt-5 bg-sky-500 hover:bg-sky-700 px-5 py-2 text-sm leading-5 rounded font-semibold text-white">
             Create Post
         </button>
     </form>
+    <div>
+        @foreach ($posts as $post)
+            <ul class="mt-10 grid gap-y-2">
+                <div class="max-w-sm w-full lg:max-w-full lg:flex">
+                    <div>
+                        <img alt="thumbnail" src="http://localhost:8888/storage/{{ $post->thumbnail_url }}"
+                            class="w-48 h-48 object-cover" />
+                    </div>
+                    <a class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+                        href="http://localhost:8888/posts/{{ $post->id }}">
+                        <div class="mb-8">
+                            <div class="text-gray-900 font-bold text-xl mb-2">{{ $post->title }}</div>
+                            <p class="text-gray-700 text-base">
+                                {{ $post->body }}
+                            </p>
+                        </div>
+                        <div>
+                            @foreach ($post->tags as $tag)
+                                <span
+                                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+                        <div class="flex items-center">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-4"
+                                src="http://localhost:8888/storage/{{ $post->user->icon_url }}" alt="">
+                            <p>{{ $post->user->name }}</p>
+                        </div>
+                    </a>
+                </div>
+            </ul>
+        @endforeach
+    </div>
 @endcomponent

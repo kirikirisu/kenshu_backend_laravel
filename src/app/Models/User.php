@@ -9,6 +9,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -29,5 +30,13 @@ class User extends Model implements
     protected $hidden = ['password', 'remember_token'];
 
     protected $casts = ['password' => 'hashed'];
+
+    /**
+     * @return HasMany<Post>
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }
