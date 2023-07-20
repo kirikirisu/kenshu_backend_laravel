@@ -6,8 +6,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Image;
-use App\Models\PostTag;
 use Exception;
 
 class DeletePostController extends Controller
@@ -26,8 +24,8 @@ class DeletePostController extends Controller
               return response()->redirectTo("/")->with('failed_delete_post', '投稿が見つかりませんでした。');
             }
 
-            Image::query()->where('post_id', $post->id)->delete();
-            PostTag::query()->where('post_id', $post_id)->delete();
+            $post->images()->delete();
+            $post->tags()->detach();
             $post->delete();
 
             DB::commit();

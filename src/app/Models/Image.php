@@ -17,6 +17,11 @@ class Image extends Model
 
     protected $fillable = ['post_id', 'url'];
 
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
     /**
      * @param string $post_id 
      * @param UploadFileDto[] $uploaded_image_list

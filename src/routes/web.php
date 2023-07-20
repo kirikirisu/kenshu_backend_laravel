@@ -37,4 +37,4 @@ Route::post('/posts', CreatePostController::class)->middleware('auth');
 
 Route::patch('/posts/{id}', UpdatePostController::class)->middleware('auth');
 
-Route::delete('/posts/{id}', DeletePostController::class)->middleware('auth');
+Route::delete('/posts/{id}', DeletePostController::class)->middleware('auth')->name('posts.destroy');

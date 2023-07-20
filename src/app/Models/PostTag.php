@@ -11,6 +11,9 @@ class PostTag extends Model
 
     protected $fillable = ['post_id', 'tag_id'];
 
+    protected $primaryKey = null;
+    public $incrementing = false;
+
     /**
      * @param string $post_id
      * @param string[] $tag_id_list

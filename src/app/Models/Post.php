@@ -17,5 +17,15 @@ class Post extends Model
 {
     use HasUuids, HasFactory;
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
+    }
+
     protected $fillable = ['id', 'user_id', 'title', 'body', 'thumbnail_url'];
 }
