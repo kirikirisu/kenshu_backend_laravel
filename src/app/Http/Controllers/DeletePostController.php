@@ -21,7 +21,10 @@ class DeletePostController extends Controller
             DB::beginTransaction();
 
             $post = Post::query()->find($post_id);
-            if (is_null($post)) return response()->redirectTo("/")->with('failed_delete_post', '投稿が見つかりませんでした。');
+            if (is_null($post)) {
+              DB::commit();
+              return response()->redirectTo("/")->with('failed_delete_post', '投稿が見つかりませんでした。');
+            }
 
             Image::query()->where('post_id', $post->id)->delete();
             PostTag::query()->where('post_id', $post_id)->delete();
