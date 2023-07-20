@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Models\Tag;
 use App\Models\Post;
