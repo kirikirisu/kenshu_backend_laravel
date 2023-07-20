@@ -39,7 +39,7 @@ class Post extends Model
     }
 
     /**
-     * @return BelongsTo<User>
+     * @return BelongsTo<User, Post>
      */
     public function user(): BelongsTo
     {

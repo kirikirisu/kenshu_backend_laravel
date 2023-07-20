@@ -12,12 +12,7 @@ class GetTopPageController extends Controller
     public function __invoke(): View
     {
         $tags = Tag::all();
-        $posts = Post::query()->get()->take(10);
-
-        // foreach($posts as $post) {
-        //     $image = $post->images();
-        //     $tag = $post->tags();
-        // }
+        $posts = Post::query()->take(10)->get();
 
         return view('top', ['posts' => $posts, 'tags' => $tags]);
     }
