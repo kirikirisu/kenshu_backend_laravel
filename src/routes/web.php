@@ -3,6 +3,7 @@
 use App\Http\Controllers\CreatePostController;
 use App\Http\Controllers\DeletePostController;
 use App\Http\Controllers\GetPostDetailController;
+use App\Http\Controllers\GetEditPostPageController;
 use App\Http\Controllers\GetTopPageController;
 use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\RegisterUserController;
@@ -34,11 +35,14 @@ Route::get('/login', function () {
 
 Route::post('/login', LoginUserController::class);
 
-
 Route::post('/posts', CreatePostController::class)->middleware('auth');
 
 Route::get('/posts/{id}', GetPostDetailController::class);
 
 Route::patch('/posts/{id}', UpdatePostController::class)->middleware('auth');
+
+Route::get('posts/{id}/edit', GetEditPostPageController::class)->middleware('auth');
+
+Route::patch('/posts/{id}', UpdatePostController::class)->middleware('auth')->name('posts.update');
 
 Route::delete('/posts/{id}', DeletePostController::class)->middleware('auth')->name('posts.destroy');
