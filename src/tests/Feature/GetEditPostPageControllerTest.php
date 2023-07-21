@@ -31,13 +31,13 @@ class GetEditPostPageControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_記事が見つからない場合トップページにリダイレクトすること(): void
+    public function test_記事が見つからない場合404が返ること(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/posts/1234/edit');
 
-        $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertStatus(404);
+        $response->assertSee('Not Found');
     }
 
     public function test_記事の作者でなかった場合トップページにリダイレクトすること(): void
