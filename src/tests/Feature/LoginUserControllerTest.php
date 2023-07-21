@@ -13,21 +13,18 @@ class LoginUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $login_user = ['email' => 'john@example.com', 'password' => 'password123'];
+
     protected function setUp(): void 
     {
         parent::setUp();
 
-        User::factory()->create();
+        User::factory()->create($this->login_user);
     }
 
     public function test_ユーザーがログインするとトップページにリダイレクトすること(): void
     {
-        $data = [
-            'email' => 'john@example.com',
-            'password' => 'password123'
-        ];
-
-        $response = $this->post('/login', $data);
+        $response = $this->post('/login', $this->login_user);
 
         $response->assertStatus(302);
         $response->assertRedirect('/');
