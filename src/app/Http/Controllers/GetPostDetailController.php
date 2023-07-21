@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\User;
 
 class GetPostDetailController extends Controller
 {
@@ -14,10 +15,12 @@ class GetPostDetailController extends Controller
     {
         /** @var string $post_id */
         $post_id = $request->route('id');
-        $post = Post::query()->find($post_id);
+        $post = Post::find($post_id);
         if (is_null($post)) return response()->redirectTo('/');
         
-        $is_author = Auth::id() === $post->user->id;
+        /** @var User $user */
+        $user = $post->user;
+        $is_author = Auth::id() === $user->id;
 
         return view('post-detail', ['post' => $post, 'is_author' => $is_author]);
     }
