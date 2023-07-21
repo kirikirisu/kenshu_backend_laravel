@@ -1,12 +1,4 @@
 @component('layout.base-layout')
-    <script>
-        const url = url('/').
-        '/posts/{{ $post->id }}/edit';
-
-        const goPostEditPage = async () => {
-            window.location.replace(url);
-        }
-    </script>
     <label for="title" class="font-bold">title:</label>
     <h2 id="title">{{ $post->title }}</h2>
     <label for="body" class="font-bold">body:</label>
@@ -32,7 +24,7 @@
         <p>{{ $post->user->name }}</p>
     </div>
     @if ($is_author)
-        <button onclick="goPostEditPage()">Update Post</button>
+        <a href="{{ url('/') . "/posts/$post->id/edit" }}">Update Post</a>
         <form method="post" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
             @csrf
             @method('DELETE')
