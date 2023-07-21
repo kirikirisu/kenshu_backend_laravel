@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 
 class GetPostDetailController extends Controller
@@ -15,7 +16,9 @@ class GetPostDetailController extends Controller
         $post_id = $request->route('id');
         $post = Post::query()->find($post_id);
         if (is_null($post)) return response()->redirectTo('/');
+        
+        $is_author = Auth::id() === $post->user->id;
 
-        return view('post-detail', ['post' => $post]);
+        return view('post-detail', ['post' => $post, 'is_author' => $is_author]);
     }
 }

@@ -31,7 +31,7 @@
             alt="user avatar">
         <p>{{ $post->user->name }}</p>
     </div>
-    @if (Auth::id() === $post->user->id)
+    @if ($is_author)
         <button onclick="goPostEditPage()">Update Post</button>
         <form method="post" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
             @csrf
