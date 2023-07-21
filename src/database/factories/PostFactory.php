@@ -17,9 +17,10 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 'oiew',
-            'title' => 'test title',
-            'body' => 'test body'
+            'user_id' => fake()->name(),
+            'title' => fake()->title(),
+            'body' => fake()->title(),
+            'thumbnail_url' => 'images/2022_05_14_224041.jpg'
         ];
     }
 }
