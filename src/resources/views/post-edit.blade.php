@@ -1,5 +1,5 @@
 @component('layout.base-layout')
-    <form class="w-2/5" method="post" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+    <form class="w-2/5" method="post" action="{{ route('posts.update', ['id' => $post->id]) }}">
         @csrf
         @method('PATCH')
         <label for="post-title" class="block text-base font-semibold">タイトル</label>
