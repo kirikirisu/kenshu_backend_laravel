@@ -1,15 +1,9 @@
 @component('layout.base-layout')
     <script>
-        const pathList = location.pathname.split("/");
-        const postId = pathList[pathList.length - 1];
-        const url = `http://localhost:8080/posts/{{ $post->id }}/edit`;
+        const url = url('/').
+        '/posts/{{ $post->id }}/edit';
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector("form");
-            form.action = url;
-        })
-
-        const getPostEditPage = async () => {
+        const goPostEditPage = async () => {
             window.location.replace(url);
         }
     </script>
@@ -27,19 +21,22 @@
     <div class="font-bold">images</div>
     <div class="flex">
         @foreach ($post->images as $image)
-            <img id={{ $image->id }} alt="image for post" class="w-40 h-40"
-                src='http://localhost:8888/storage/{{ $image->url }}' width="20%" />
+            <img id={{ $image->id }} alt="image for post" class="w-40 h-40" src='{{ asset($image->url) }}'
+                width="20%" />
         @endforeach
     </div>
     <div class="font-bold">user</div>
     <div class="flex items-center">
-        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-4"
-            src='http://localhost:8888/storage/{{ $post->user->icon_url }}' alt="user avatar">
+        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-4" src='{{ asset($post->user->icon_url) }}'
+            alt="user avatar">
         <p>{{ $post->user->name }}</p>
     </div>
-    <button onclick="getPostEditPage()">編集</button>
-    <form method="post" action="">
-        <input hidden id="_method" name="_method" value="DELETE" />
-        <button type="submit">削除</button>
-    </form>
+    @if (Auth::id() === $post->user->id)
+        <button onclick="goPostEditPage()">Update Post</button>
+        <form method="post" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete Post</button>
+        </form>
+    @endif
 @endcomponent
