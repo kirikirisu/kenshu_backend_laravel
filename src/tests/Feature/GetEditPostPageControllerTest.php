@@ -49,7 +49,6 @@ class GetEditPostPageControllerTest extends TestCase
 
         $response = $this->actingAs($login_user)->get($request_url);
 
-        $response->assertStatus(302);
-        $response->assertRedirect('/');
+        $response->assertStatus(403);
     }
 }

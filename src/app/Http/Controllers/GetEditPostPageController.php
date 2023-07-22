@@ -19,9 +19,7 @@ class GetEditPostPageController extends Controller
         $post = Post::query()->find($post_id);
         if (is_null($post)) return response()->view('not-found', [], 404);
 
-        /** @var User $user */
-        $user = $post->user;
-        if (Auth::id() !== $user->id) return response()->redirectTo('/');
+        $this->authorize('view', $post);
 
         return view('post-edit', ['post' => $post]);
     }
