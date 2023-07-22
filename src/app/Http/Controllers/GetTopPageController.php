@@ -11,7 +11,7 @@ class GetTopPageController extends Controller
     public function __invoke(): View
     {
         $tags = Tag::all();
-        $posts = Post::query()->take(10)->get();
+        $posts = Post::query()->paginate(10);
 
         return view('top', ['posts' => $posts, 'tags' => $tags]);
     }
