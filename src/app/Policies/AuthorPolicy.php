@@ -17,8 +17,13 @@ class AuthorPolicy
         return $user->id === $post->user->id;
     }
 
-    public function update(User $user, User $post_user)
+    public function update(User $user, Post $post)
     {
-        return $user->id === $post_user->id;
+        return $user->id === $post->user->id;
+    }
+    
+    public function delete(User $user, Post $post)
+    {
+        return $user->id === $post->user->id;
     }
 }

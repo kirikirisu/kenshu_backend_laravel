@@ -27,9 +27,7 @@ class DeletePostController extends Controller
               return response()->view('not-found', [], 404);
             }
 
-            /** @var User $user */
-            $user = $post->user;
-            if (Auth::id() !== $user->id) return response()->redirectTo('/')->with('failed_delete_post', '他のユーザーの投稿は、編集、更新、削除できません。');
+            $this->authorize('delete', $post);
 
             $post->images()->delete();
             $post->tags()->detach();
