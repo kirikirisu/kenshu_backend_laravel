@@ -69,35 +69,55 @@
         </button>
     </form>
     <div>
-        @foreach ($posts as $post)
-            <ul class="mt-10 grid gap-y-2">
-                <div class="max-w-sm w-full lg:max-w-full lg:flex">
-                    <div>
-                        <img alt="thumbnail" src="http://localhost:8888/storage/{{ $post->thumbnail_url }}"
-                            class="w-48 h-48 object-cover" />
-                    </div>
-                    <a class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
-                        href="http://localhost:8888/posts/{{ $post->id }}">
-                        <div class="mb-8">
-                            <div class="text-gray-900 font-bold text-xl mb-2">{{ $post->title }}</div>
-                            <p class="text-gray-700 text-base">
-                                {{ $post->body }}
-                            </p>
-                        </div>
+        @if (!empty($posts) && $posts->count())
+            @foreach ($posts as $key => $post)
+                <ul class="mt-10 grid gap-y-2">
+                    <div class="max-w-sm w-full lg:max-w-full lg:flex">
                         <div>
-                            @foreach ($post->tags as $tag)
-                                <span
-                                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $tag->name }}</span>
-                            @endforeach
+                            <img alt="thumbnail" src="http://localhost:8888/storage/{{ $post->thumbnail_url }}"
+                                class="w-48 h-48 object-cover" />
                         </div>
-                        <div class="flex items-center">
-                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-4"
-                                src="http://localhost:8888/storage/{{ $post->user->icon_url }}" alt="">
-                            <p>{{ $post->user->name }}</p>
-                        </div>
-                    </a>
-                </div>
-            </ul>
-        @endforeach
+                        <a class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+                            href="http://localhost:8888/posts/{{ $post->id }}">
+                            <div class="mb-8">
+                                <div class="text-gray-900 font-bold text-xl mb-2">{{ $post->title }}</div>
+                                <p class="text-gray-700 text-base">
+                                    {{ $post->body }}
+                                </p>
+                            </div>
+                            <div>
+                                @foreach ($post->tags as $tag)
+                                    <span
+                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+                            <div class="flex items-center">
+                                <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-4"
+                                    src="http://localhost:8888/storage/{{ $post->user->icon_url }}" alt="">
+                                <p>{{ $post->user->name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </ul>
+            @endforeach
+        @else
+            <p>There are no data.</p>
+        @endif
+        <div class="my-8 flex">
+            <div class="mx-2">
+                @if ($posts->onFirstPage())
+                    <div class="disabled"><span>Previous</span></div>
+                @else
+                    <div><a href="{{ $posts->previousPageUrl() }}" rel="prev">← Previous</a></div>
+                @endif
+            </div>
+            <div class="mx-2">
+                @if ($posts->hasMorePages())
+                    <div><a href="{{ $posts->nextPageUrl() }}" rel="next">Next →</a></div>
+                @else
+                    <div class="disabled"><span>Next</span></div>
+                @endif
+            </div>
+        </div>
     </div>
 @endcomponent
