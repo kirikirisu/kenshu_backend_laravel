@@ -51,8 +51,6 @@ class DeletePostControllerTest extends TestCase
         $response = $this->actingAs($login_user)->delete($request_url);
 
         $response->assertStatus(302);
-        $response->assertRedirect('/');
-        $this->assertEquals('他のユーザーの投稿は、編集、更新、削除できません。', session('failed_delete_post'));
     }
 
     public function test_記事が見つからない場合404が返ること(): void

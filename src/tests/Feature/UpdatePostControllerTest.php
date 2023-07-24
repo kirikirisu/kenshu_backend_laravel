@@ -46,9 +46,7 @@ class UpdatePostControllerTest extends TestCase
 
         $response = $this->actingAs($login_user)->patch($request_url, $this->patch_data);
 
-        $response->assertStatus(302);
-        $response->assertRedirect('/');
-        $this->assertEquals('他のユーザーの投稿は、編集、更新、削除できません。', session('failed_update_post'));
+        $response->assertStatus(403);
     }
 
     public function test_記事が見つからない場合404が返ること(): void

@@ -19,9 +19,7 @@ class UpdatePostController extends Controller
         $post = Post::query()->find($post_id);
         if (is_null($post)) return response()->view('not-found', [], 404);
 
-        /** @var User $user */
-        $user = $post->user;
-        if (Auth::id() !== $user->id) return response()->redirectTo('/')->with('failed_update_post', '他のユーザーの投稿は、編集、更新、削除できません。');
+        $this->authorize('update', $post);
 
         $post->title = $request->title;
         $post->body = $request->body;
