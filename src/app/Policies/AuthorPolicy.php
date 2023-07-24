@@ -12,17 +12,17 @@ class AuthorPolicy
     {
     }
 
-    public function view(User $user, Post $post)
+    public function view(User $user, Post $post): bool
     {
         return $user->id === $post->user->id;
     }
 
-    public function update(User $user, Post $post)
+    public function update(User $user, Post $post): bool
     {
         return $user->id === $post->user->id;
     }
     
-    public function delete(User $user, Post $post)
+    public function delete(User $user, Post $post): bool
     {
         return $user->id === $post->user->id;
     }
